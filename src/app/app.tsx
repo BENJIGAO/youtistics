@@ -1,21 +1,15 @@
 import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Home from 'features/Home';
+import Dashboard from 'features/Dashboard';
 
 const App = () => {
   return (
-    <div>
-      <header>
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path='/home' element={<Home />} />
+      <Route path='/dashboard' element={<Dashboard />} />
+      <Route path='/' element={<Navigate to="/home" />} />
+    </Routes>
   );
 }
 
