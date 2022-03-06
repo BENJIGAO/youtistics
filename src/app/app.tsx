@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Home from 'features/Home';
 import Dashboard from 'features/Dashboard';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path='/home' element={<Home />} />
