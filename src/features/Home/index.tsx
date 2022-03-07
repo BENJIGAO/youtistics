@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import HomeNavbar from 'features/Home/Navbar'
-import AuthButton from 'common/components/Auth'
+import AuthButton from 'features/Home/AuthButton'
 
 
 const Home: React.FC = () => {
