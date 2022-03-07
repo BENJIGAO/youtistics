@@ -1,6 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 import HomeNavbar from 'features/Home/Navbar'
+import AuthButton from 'common/components/Auth'
 
 
 const Home: React.FC = () => {
@@ -11,11 +12,7 @@ const Home: React.FC = () => {
       <nav>
         <Link to='/dashboard'>Dashboard</Link>
       </nav>
-      <button
-        onClick={() => console.log('Redirect to Google authentication page...')}
-      >
-        Get Started
-      </button>
+      <AuthButton />
     </div>
   );
 }
