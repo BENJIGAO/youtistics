@@ -43,7 +43,6 @@
   },
   "devDependencies": {
     "@types/gapi": "^0.0.41",
-    "@types/googlemaps": "^3.43.3",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.7",
     "tailwindcss": "^3.0.23"

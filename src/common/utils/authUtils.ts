@@ -1,3 +1,5 @@
+// TODO: find @types package for google.accounts.oauth2.initTokenClient
+// @ts-ignore
 let tokenClient
 let accessToken
 
@@ -32,5 +34,18 @@ export const gapiLoad = (): void => {
 }
 
 export const gisInit = (): void => {
-  
+  // @ts-ignore
+  tokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: '181813367814-77g0b6tv1u34i8na7j0857erjokvvamo.apps.googleusercontent.com',
+    scope: 'https://www.googleapis.com/auth/youtube.readonly',
+    // @ts-ignore
+    callback: (tokenResponse) => {
+      console.log('Token was successfully received')
+    }
+  })
+}
+
+export const getToken = (): void => {
+  // @ts-ignore
+  tokenClient.requestAccessToken();
 }
