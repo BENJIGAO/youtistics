@@ -16,8 +16,19 @@ export const loadScript = (src: string, onload: () => void): void => {
   document.head.appendChild(script)
 }
 
-export const gapiStart = (): void => {
+const gapiStart = (): void => {
+  window.gapi.client.init({
+  }).then(() => {
+    window.gapi.client.load('youtube', 'v3')
+  }).then(response => {
+    console.log('discovery document loaded')
+  }).catch(reason => {
+    console.log('Error: ' + reason.result.error.message)
+  })
+}
 
+export const gapiLoad = (): void => {
+  window.gapi.load('client', gapiStart)
 }
 
 export const gisInit = (): void => {
