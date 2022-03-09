@@ -40,12 +40,19 @@ export const gisInit = (): void => {
     scope: 'https://www.googleapis.com/auth/youtube.readonly',
     // @ts-ignore
     callback: (tokenResponse) => {
-      console.log('Token was successfully received')
+      accessToken = tokenResponse.access_token
+      console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()))
+      getSubscriptions()
     }
   })
 }
 
 export const getToken = (): void => {
   // @ts-ignore
-  tokenClient.requestAccessToken();
+  tokenClient.requestAccessToken()
+}
+
+export const getSubscriptions = (): void => {
+  // @ts-ignore
+  window.gapi.client.youtube.subscriptions.list({'part': 'snippet', 'mine': 'true'}).execute(res => console.log(res))
 }
