@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history'
 import { loadScript, gapiLoad, gisInit } from 'common/utils/authUtils';
 import Home from 'features/Home';
 import Dashboard from 'features/Dashboard';
+
+export const history = createBrowserHistory()
 
 const App: React.FC = () => {
   useEffect(() => {
@@ -11,11 +14,13 @@ const App: React.FC = () => {
   }, [])
 
   return (
-    <Routes>
-      <Route path='/home' element={<Home />} />
-      <Route path='/dashboard' element={<Dashboard />} />
-      <Route path='/' element={<Navigate to='/home' />} />
-    </Routes>
+    <HistoryRouter history={history}>
+      <Routes>
+        <Route path='/home' element={<Home />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/' element={<Navigate to='/home' />} />
+      </Routes>
+    </HistoryRouter>
   );
 }
 

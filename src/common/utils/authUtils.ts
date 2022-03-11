@@ -1,3 +1,5 @@
+import { history } from 'app/app'
+
 // TODO: find @types package for google.accounts.oauth2.initTokenClient
 // @ts-ignore
 let tokenClient
@@ -42,7 +44,8 @@ export const gisInit = (): void => {
     callback: (tokenResponse) => {
       accessToken = tokenResponse.access_token
       console.log('gapi.client access token: ' + JSON.stringify(gapi.client.getToken()))
-      getSubscriptions()
+      history.push('/dashboard')
+
     }
   })
 }
