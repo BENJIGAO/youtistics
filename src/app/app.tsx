@@ -18,7 +18,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path='/home' element={<Home />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/' element={<Navigate to='/home' />} />
+        <Route path='/' element={<Navigate to='/dashboard' />} />
       </Routes>
     </HistoryRouter>
   );

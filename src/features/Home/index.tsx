@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import HomeNavbar from 'features/Home/Navbar'
 import AuthButton from 'features/Home/AuthButton'
 
-
 const Home: React.FC = () => {
   return (
     <div>
