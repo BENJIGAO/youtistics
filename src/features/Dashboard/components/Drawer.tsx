@@ -26,6 +26,12 @@ const CustomDrawer = styled(MuiDrawer)(() => ({
   },
 }));
 
+const CustomListItemButton = styled(ListItemButton)(({ theme, selected }) => ({
+  borderLeftWidth: theme.spacing(0.75),
+  borderLeftColor: selected ? theme.palette.primary.light : "transparent",
+  borderLeftStyle: "solid",
+}));
+
 const Drawer = ({ drawerWidth }: IDrawerProps) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const navigate = useNavigate();
@@ -48,7 +54,7 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
         aria-label="main dashboard items"
         sx={{ padding: 0 }}
       >
-        <ListItemButton
+        <CustomListItemButton
           selected={selectedIndex === 0}
           onClick={(event) => handleListItemClick(event, 0, "/home")}
         >
@@ -56,8 +62,8 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
-        </ListItemButton>
-        <ListItemButton
+        </CustomListItemButton>
+        <CustomListItemButton
           selected={selectedIndex === 1}
           onClick={(event) => handleListItemClick(event, 1, "/subscriptions")}
         >
@@ -65,8 +71,8 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
             <SubscriptionsIcon />
           </ListItemIcon>
           <ListItemText primary="Subscriptions" />
-        </ListItemButton>
-        <ListItemButton
+        </CustomListItemButton>
+        <CustomListItemButton
           selected={selectedIndex === 2}
           onClick={(event) => handleListItemClick(event, 2, "/liked-videos")}
         >
@@ -74,8 +80,8 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
             <ThumbUpIcon />
           </ListItemIcon>
           <ListItemText primary="Liked Videos" />
-        </ListItemButton>
-        <ListItemButton
+        </CustomListItemButton>
+        <CustomListItemButton
           selected={selectedIndex === 3}
           onClick={(event) => handleListItemClick(event, 3, "/channels")}
         >
@@ -83,8 +89,8 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
             <YouTubeIcon />
           </ListItemIcon>
           <ListItemText primary="Other Channels" />
-        </ListItemButton>
-        <ListItemButton
+        </CustomListItemButton>
+        <CustomListItemButton
           selected={selectedIndex === 4}
           onClick={(event) => handleListItemClick(event, 4, "/statistics")}
         >
@@ -92,7 +98,7 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
             <InsightsIcon />
           </ListItemIcon>
           <ListItemText primary="Fun Statistics" />
-        </ListItemButton>
+        </CustomListItemButton>
       </List>
     </CustomDrawer>
   );
