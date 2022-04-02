@@ -43,7 +43,11 @@ const Drawer = ({ drawerWidth }: IDrawerProps) => {
     <CustomDrawer variant="permanent" sx={{ width: drawerWidth }}>
       <YoutisticsLogo />
       <Divider />
-      <List component="nav" aria-label="main dashboard items">
+      <List
+        component="nav"
+        aria-label="main dashboard items"
+        sx={{ padding: 0 }}
+      >
         <ListItemButton
           selected={selectedIndex === 0}
           onClick={(event) => handleListItemClick(event, 0, "/home")}
