@@ -1,27 +1,19 @@
 import * as React from "react";
-
-import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 
 import AppBar from "features/Dashboard/components/AppBar";
 import Drawer from "features/Dashboard/components/Drawer";
-
 import Copyright from "common/components/Copyright";
 import Chart from "features/Dashboard/Home/components/Chart";
 import Deposits from "features/Dashboard/Home/components/Deposits";
 import Orders from "features/Dashboard/Home/components/Orders";
 
-const HomeContent = () => {
+const Home = () => {
   return (
     <Box
       component="main"
@@ -76,4 +68,4 @@ const HomeContent = () => {
   );
 };
 
-export default HomeContent;
+export default Home;
