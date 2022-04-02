@@ -17,11 +17,11 @@ import AppBar from "features/Dashboard/components/AppBar";
 import Drawer from "features/Dashboard/components/Drawer";
 
 import Copyright from "common/components/Copyright";
-import Chart from "features/Dashboard/components/Chart";
-import Deposits from "features/Dashboard/components/Deposits";
-import Orders from "features/Dashboard/components/Orders";
+import Chart from "features/Dashboard/Home/components/Chart";
+import Deposits from "features/Dashboard/Home/components/Deposits";
+import Orders from "features/Dashboard/Home/components/Orders";
 
-const DashboardContent = () => {
+const HomeContent = () => {
   return (
     <Box
       component="main"
@@ -76,4 +76,4 @@ const DashboardContent = () => {
   );
 };
 
-export default DashboardContent;
+export default HomeContent;
