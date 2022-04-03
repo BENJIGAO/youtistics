@@ -24,11 +24,7 @@ const Home = () => {
           </Typography>
         </Grid>
         <Grid item container xs={12}>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
+          <Grid item xs={3}></Grid>
         </Grid>
         <Grid item xs={12}>
           <Typography component="h2" variant="h4">
