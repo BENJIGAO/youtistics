@@ -5,8 +5,10 @@ import Copyright from "common/components/Copyright";
 import Chart from "features/Dashboard/Home/components/Chart";
 import Deposits from "features/Dashboard/Home/components/Deposits";
 import Orders from "features/Dashboard/Home/components/Orders";
+import { getSubscriptions } from "common/utils/apiUtils";
 
 const Home = () => {
+  // getSubscriptions().then((res) => console.log(res));
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Grid container spacing={3}>
