@@ -1,52 +1,50 @@
-import Container from "@mui/material/Container";
+import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Copyright from "common/components/Copyright";
-import Chart from "features/Dashboard/Home/components/Chart";
-import Deposits from "features/Dashboard/Home/components/Deposits";
-import Orders from "features/Dashboard/Home/components/Orders";
 import { getSubscriptions } from "common/utils/apiUtils";
+import { Typography, Box } from "@mui/material";
 
 const Home = () => {
-  // getSubscriptions().then((res) => console.log(res));
+  const [subscriptions, setSubscriptions] = useState([]);
+
+  useEffect(() => {
+    getSubscriptions()
+      .then((res) => setSubscriptions(res.result.items))
+      .catch((err) => console.log(err));
+  }, []);
+
+  console.log(subscriptions);
+
   return (
-    <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-      <Grid container spacing={3}>
-        {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240,
-            }}
-          >
-            <Chart />
-          </Paper>
-        </Grid>
-        {/* Recent Deposits */}
-        <Grid item xs={12} md={4} lg={3}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-              height: 240,
-            }}
-          >
-            <Deposits />
-          </Paper>
-        </Grid>
-        {/* Recent Orders */}
+    <Box sx={{ m: 4 }}>
+      <Grid container rowSpacing={2}>
         <Grid item xs={12}>
-          <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-            <Orders />
-          </Paper>
+          <Typography component="h2" variant="h4">
+            Recent Subscriptions
+          </Typography>
+        </Grid>
+        <Grid item container xs={12}>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography component="h2" variant="h4">
+            Recent Liked Videos
+          </Typography>
+        </Grid>
+        <Grid item container xs={12}>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
+          <Grid item xs={2.4}></Grid>
         </Grid>
       </Grid>
       <Copyright sx={{ pt: 4 }} />
-    </Container>
+    </Box>
   );
 };
 
