@@ -1,19 +1,20 @@
+import { Avatar } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Box } from "@mui/system";
 
 interface IAppBarProps {
   drawerWidth: number;
 }
 
-const AppBar = (props: IAppBarProps) => {
-  const { drawerWidth } = props;
+const AppBar = ({ drawerWidth }: IAppBarProps) => {
   return (
     <MuiAppBar
       position="absolute"
       sx={{ width: `calc(100% - ${drawerWidth}px)` }}
     >
-      <Toolbar>
+      <Toolbar sx={{ justifyContent: "space-between" }}>
         <Typography
           component="h1"
           variant="h6"
@@ -23,6 +24,7 @@ const AppBar = (props: IAppBarProps) => {
         >
           Dashboard
         </Typography>
+        <Avatar>B</Avatar>
       </Toolbar>
     </MuiAppBar>
   );
