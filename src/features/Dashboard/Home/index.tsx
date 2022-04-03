@@ -3,6 +3,7 @@ import Grid from "@mui/material/Grid";
 import Copyright from "common/components/Copyright";
 import { getSubscriptions } from "common/utils/apiUtils";
 import { Typography, Box } from "@mui/material";
+import SubscriptionCard from "./components/SubscriptionCard";
 
 const Home = () => {
   const [subscriptions, setSubscriptions] = useState([]);
@@ -17,14 +18,26 @@ const Home = () => {
 
   return (
     <Box sx={{ m: 4 }}>
-      <Grid container rowSpacing={2}>
+      <Grid container rowSpacing={3}>
         <Grid item xs={12}>
           <Typography component="h2" variant="h4">
             Recent Subscriptions
           </Typography>
         </Grid>
-        <Grid item container xs={12}>
-          <Grid item xs={3}></Grid>
+        <Grid item container xs={12} spacing={3}>
+          {subscriptions !== [] &&
+            subscriptions.map((sub, index) => {
+              return (
+                <Grid item xs={12} sm={6} md={4} lg={2.4}>
+                  <SubscriptionCard
+                    title={sub.snippet.title}
+                    description={sub.snippet.description}
+                    imageUrl={sub.snippet.thumbnails.high.url}
+                    key={index}
+                  />
+                </Grid>
+              );
+            })}
         </Grid>
         <Grid item xs={12}>
           <Typography component="h2" variant="h4">
