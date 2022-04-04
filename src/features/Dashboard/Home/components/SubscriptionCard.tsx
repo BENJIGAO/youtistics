@@ -19,7 +19,12 @@ const SubscriptionCard = ({
 }: ISubscriptionCard) => {
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardMedia component="img" image={imageUrl} alt="green iguana" />
+      <CardMedia
+        sx={{ maxHeight: 200 }}
+        component="img"
+        image={imageUrl}
+        alt={title}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
