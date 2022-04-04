@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
+import { Subscription } from "@types";
 import Copyright from "common/components/Copyright";
 import { getSubscriptions } from "common/utils/apiUtils";
 import { Typography, Box } from "@mui/material";
 import SubscriptionCard from "./components/SubscriptionCard";
 
 const Home = () => {
-  const [subscriptions, setSubscriptions] = useState([]);
+  const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
   useEffect(() => {
     getSubscriptions()
-      .then((res) => setSubscriptions(res.result.items))
+      .then((res) => setSubscriptions(res.result.items ?? []))
       .catch((err) => console.log(err));
   }, []);
 
@@ -30,9 +31,9 @@ const Home = () => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={2.4}>
                   <SubscriptionCard
-                    title={sub.snippet.title}
-                    description={sub.snippet.description}
-                    imageUrl={sub.snippet.thumbnails.high.url}
+                    title={sub?.snippet?.title}
+                    description={sub?.snippet?.description}
+                    imageUrl={sub?.snippet?.thumbnails?.high?.url}
                     key={index}
                   />
                 </Grid>
