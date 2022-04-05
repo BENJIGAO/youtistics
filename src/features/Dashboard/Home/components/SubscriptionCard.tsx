@@ -1,45 +1,70 @@
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Tooltip } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ReactCardFlip from "react-card-flip";
 
-const CustomCard = styled(Card)(({ theme }) => ({
-  "&:hover": { boxShadow: theme.shadows[12] },
+const CustomCard = styled(Card)(() => ({
+  minHeight: 300,
 }));
-
 interface ISubscriptionCard {
-  title?: string;
-  description?: string;
-  imageUrl?: string;
+  channelId?: string;
+  channelTitle?: string;
+  channelDescription?: string;
+  channelImageUrl?: string;
 }
 
 const SubscriptionCard = ({
-  title,
-  description,
-  imageUrl,
+  channelId,
+  channelTitle,
+  channelDescription,
+  channelImageUrl,
 }: ISubscriptionCard) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
   return (
-    <Tooltip title={title ?? "Loading..."} placement="bottom">
-      <CustomCard onClick={() => console.log("hello")}>
-        <CardMedia
-          sx={{ maxHeight: 200 }}
-          component="img"
-          image={imageUrl}
-          alt={title}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </CustomCard>
+    <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <CustomCard key="front">
+          <CardMedia
+            sx={{ maxHeight: 200 }}
+            component="img"
+            image={channelImageUrl}
+            alt={channelTitle}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {channelTitle}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
+              Learn More
+            </Button>
+          </CardActions>
+        </CustomCard>
+        <CustomCard key="back">
+          <CardActions>
+            <IconButton onClick={() => setIsFlipped(!isFlipped)}>
+              <ArrowBackIosNewIcon fontSize="small" color="primary" />
+            </IconButton>
+          </CardActions>
+          <CardContent>
+            <Typography variant="h6" component="h4">
+              Statistics
+            </Typography>
+            <Typography variant="h6" component="h6">
+              Description
+            </Typography>
+            <Typography>{channelDescription}</Typography>
+          </CardContent>
+        </CustomCard>
+      </ReactCardFlip>
     </Tooltip>
   );
 };

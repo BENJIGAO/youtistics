@@ -31,9 +31,10 @@ const Home = () => {
               return (
                 <Grid item xs={12} sm={6} md={4} lg={2.4}>
                   <SubscriptionCard
-                    title={sub?.snippet?.title}
-                    description={sub?.snippet?.description}
-                    imageUrl={sub?.snippet?.thumbnails?.high?.url}
+                    channelId={sub?.snippet?.resourceId?.channelId}
+                    channelTitle={sub?.snippet?.title}
+                    channelDescription={sub?.snippet?.description}
+                    channelImageUrl={sub?.snippet?.thumbnails?.high?.url}
                     key={index}
                   />
                 </Grid>
