@@ -9,11 +9,11 @@ import { IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ReactCardFlip from "react-card-flip";
-import { Channel } from "@types";
+import { ChannelStatistics } from "@types";
 import { getChannelById } from "common/utils/apiUtils";
 
 const CustomCard = styled(Card)(() => ({
-  minHeight: 300,
+  height: 320,
 }));
 interface ISubscriptionCard {
   channelId?: string;
@@ -29,13 +29,20 @@ const SubscriptionCard = ({
   channelImageUrl,
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [channelStatistics, setChannelStatistics] = useState<Channel>({});
+  const [channelStatistics, setChannelStatistics] = useState<ChannelStatistics>(
+    {}
+  );
+
+  console.log(channelStatistics);
 
   useEffect(() => {
     if (channelId !== undefined) {
-      console.log(channelId);
       getChannelById(channelId)
-        .then((res) => console.log(res))
+        .then((res) => {
+          if (res.result.items !== undefined && res.result.items.length > 0) {
+            setChannelStatistics(res.result.items[0]?.statistics ?? {});
+          }
+        })
         .catch((err) => console.log(err));
     }
   }, [channelId]);
@@ -63,15 +70,20 @@ const SubscriptionCard = ({
       </Tooltip>
       <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
         <CustomCard key="back">
-          <CardActions>
+          <CardActions sx={{ pb: 0 }}>
             <IconButton onClick={() => setIsFlipped(!isFlipped)}>
               <ArrowBackIosNewIcon fontSize="small" color="primary" />
             </IconButton>
           </CardActions>
-          <CardContent>
+          <CardContent sx={{ py: 0 }}>
             <Typography variant="h6" component="h4">
               Statistics
             </Typography>
+            <Typography>
+              Subscriber Count: {channelStatistics.subscriberCount}
+            </Typography>
+            <Typography>Video Count: {channelStatistics.videoCount}</Typography>
+            <Typography>View Count: {channelStatistics.viewCount}</Typography>
             <Typography variant="h6" component="h6">
               Description
             </Typography>
