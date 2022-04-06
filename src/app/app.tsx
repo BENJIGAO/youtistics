@@ -23,7 +23,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/home" element={<Home />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="*" element={<div>Not found</div>} />
       </Routes>
     </HistoryRouter>

@@ -29,13 +29,12 @@ const Home = () => {
           {subscriptions !== [] &&
             subscriptions.map((sub, index) => {
               return (
-                <Grid item xs={12} sm={6} md={4} lg={2.4}>
+                <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
                   <SubscriptionCard
-                    channelId={sub?.snippet?.resourceId?.channelId}
-                    channelTitle={sub?.snippet?.title}
-                    channelDescription={sub?.snippet?.description}
-                    channelImageUrl={sub?.snippet?.thumbnails?.high?.url}
-                    key={index}
+                    channelId={sub.snippet?.resourceId?.channelId}
+                    channelTitle={sub.snippet?.title}
+                    channelDescription={sub.snippet?.description}
+                    channelImageUrl={sub.snippet?.thumbnails?.high?.url}
                   />
                 </Grid>
               );

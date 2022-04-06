@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,6 +9,8 @@ import { IconButton, Tooltip } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ReactCardFlip from "react-card-flip";
+import { Channel } from "@types";
+import { getChannelById } from "common/utils/apiUtils";
 
 const CustomCard = styled(Card)(() => ({
   minHeight: 300,
@@ -27,9 +29,19 @@ const SubscriptionCard = ({
   channelImageUrl,
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [channelStatistics, setChannelStatistics] = useState<Channel>({});
+
+  useEffect(() => {
+    if (channelId !== undefined) {
+      console.log(channelId);
+      getChannelById(channelId)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+    }
+  }, [channelId]);
   return (
-    <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
-      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
         <CustomCard key="front">
           <CardMedia
             sx={{ maxHeight: 200 }}
@@ -48,6 +60,8 @@ const SubscriptionCard = ({
             </Button>
           </CardActions>
         </CustomCard>
+      </Tooltip>
+      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
         <CustomCard key="back">
           <CardActions>
             <IconButton onClick={() => setIsFlipped(!isFlipped)}>
@@ -64,8 +78,8 @@ const SubscriptionCard = ({
             <Typography>{channelDescription}</Typography>
           </CardContent>
         </CustomCard>
-      </ReactCardFlip>
-    </Tooltip>
+      </Tooltip>
+    </ReactCardFlip>
   );
 };
 
