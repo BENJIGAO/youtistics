@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ReactCardFlip from "react-card-flip";
 import { ChannelStatistics } from "@types";
+import ImageNotFound from "assets/ImageNotFound.jpg";
 import { getChannelById } from "common/utils/apiUtils";
 
 const CustomCard = styled(Card)(() => ({
@@ -55,6 +56,7 @@ const SubscriptionCard = ({
             component="img"
             image={channelImageUrl}
             alt={channelTitle}
+            onError={(e: any) => (e.target.value = ImageNotFound)}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
