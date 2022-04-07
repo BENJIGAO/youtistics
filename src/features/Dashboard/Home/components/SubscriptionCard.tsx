@@ -5,13 +5,15 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { IconButton, Tooltip } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ReactCardFlip from "react-card-flip";
 import { ChannelStatistics } from "@types";
 import ImageNotFound from "assets/ImageNotFound.jpg";
 import { getChannelById } from "common/utils/apiUtils";
+import SubscriptionModal from "features/Dashboard/Home/components/SubscriptionModal";
 
 const CustomCard = styled(Card)(() => ({
   height: 320,
@@ -30,6 +32,7 @@ const SubscriptionCard = ({
   channelImageUrl,
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [channelStatistics, setChannelStatistics] = useState<ChannelStatistics>(
     {}
   );
@@ -48,52 +51,71 @@ const SubscriptionCard = ({
     }
   }, [channelId]);
   return (
-    <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
-        <CustomCard key="front">
-          <CardMedia
-            sx={{ maxHeight: 200 }}
-            component="img"
-            image={channelImageUrl}
-            alt={channelTitle}
-            onError={(e: any) => (e.target.value = ImageNotFound)}
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {channelTitle}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
-              Learn More
-            </Button>
-          </CardActions>
-        </CustomCard>
-      </Tooltip>
-      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
-        <CustomCard key="back">
-          <CardActions sx={{ pb: 0 }}>
-            <IconButton onClick={() => setIsFlipped(!isFlipped)}>
-              <ArrowBackIosNewIcon fontSize="small" color="primary" />
-            </IconButton>
-          </CardActions>
-          <CardContent sx={{ py: 0 }}>
-            <Typography variant="h6" component="h4">
-              Statistics
-            </Typography>
-            <Typography>
-              Subscriber Count: {channelStatistics.subscriberCount}
-            </Typography>
-            <Typography>Video Count: {channelStatistics.videoCount}</Typography>
-            <Typography>View Count: {channelStatistics.viewCount}</Typography>
-            <Typography variant="h6" component="h6">
-              Description
-            </Typography>
-            <Typography>{channelDescription}</Typography>
-          </CardContent>
-        </CustomCard>
-      </Tooltip>
-    </ReactCardFlip>
+    <>
+      <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
+          <CustomCard key="front">
+            <CardMedia
+              sx={{ maxHeight: 200 }}
+              component="img"
+              image={channelImageUrl}
+              alt={channelTitle}
+              onError={(e: any) => (e.target.value = ImageNotFound)}
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {channelTitle}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
+                Learn More
+              </Button>
+            </CardActions>
+          </CustomCard>
+        </Tooltip>
+        <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
+          <CustomCard key="back">
+            <CardActions sx={{ pb: 0 }}>
+              <IconButton onClick={() => setIsFlipped(!isFlipped)}>
+                <ArrowBackIosNewIcon fontSize="small" color="primary" />
+              </IconButton>
+            </CardActions>
+            <CardContent sx={{ py: 0 }}>
+              <Typography variant="h6" component="h4">
+                Statistics
+              </Typography>
+              <Typography>
+                Subscriber Count: {channelStatistics.subscriberCount}
+              </Typography>
+              <Typography>
+                Video Count: {channelStatistics.videoCount}
+              </Typography>
+              <Typography>View Count: {channelStatistics.viewCount}</Typography>
+              <Typography variant="h6" component="h6">
+                Description
+              </Typography>
+              <Typography>
+                {channelDescription ? channelDescription.substring(0, 150) : ""}
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  sx={{ display: "inline", minWidth: 0, padding: 0 }}
+                >
+                  ...
+                </Button>
+              </Typography>
+            </CardContent>
+          </CustomCard>
+        </Tooltip>
+      </ReactCardFlip>
+      <SubscriptionModal
+        channelDescription={
+          channelDescription || "Error Loading Channel Description"
+        }
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
+    </>
   );
 };
 
