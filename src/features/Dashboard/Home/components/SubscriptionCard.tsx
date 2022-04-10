@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ReactCardFlip from "react-card-flip";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -14,7 +14,6 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ChannelStatistics } from "@types";
 import ImageNotFound from "assets/ImageNotFound.jpg";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
-import { getChannelById } from "common/utils/apiUtils";
 import { nFormatter } from "common/utils/generalUtils";
 
 const CustomCard = styled(Card)(() => ({
@@ -22,37 +21,19 @@ const CustomCard = styled(Card)(() => ({
 }));
 
 interface ISubscriptionCard {
-  channelId?: string;
   channelTitle?: string;
   channelDescription?: string;
   channelImageUrl?: string;
+  channelStats?: ChannelStatistics;
 }
 
 const SubscriptionCard = ({
-  channelId,
   channelTitle,
   channelDescription,
   channelImageUrl,
+  channelStats,
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
-  const [channelStatistics, setChannelStatistics] = useState<ChannelStatistics>(
-    {}
-  );
-
-  console.log(channelStatistics);
-
-  // will refactor to include the channel statistic fetching logic in the parent component
-  useEffect(() => {
-    if (channelId !== undefined) {
-      getChannelById(channelId)
-        .then((res) => {
-          if (res.result.items !== undefined && res.result.items.length > 0) {
-            setChannelStatistics(res.result.items[0]?.statistics ?? {});
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [channelId]);
 
   const tempNFormatter = (num: string) => {
     return nFormatter(parseFloat(num), 1);
@@ -96,20 +77,20 @@ const SubscriptionCard = ({
                 </Typography>
                 <Typography>
                   View Count:{" "}
-                  {channelStatistics.viewCount
-                    ? tempNFormatter(channelStatistics.viewCount)
+                  {channelStats?.viewCount
+                    ? tempNFormatter(channelStats.viewCount)
                     : "ERROR"}
                 </Typography>
                 <Typography>
                   Subscriber Count:{" "}
-                  {channelStatistics.subscriberCount
-                    ? tempNFormatter(channelStatistics.subscriberCount)
+                  {channelStats?.subscriberCount
+                    ? tempNFormatter(channelStats.subscriberCount)
                     : "ERROR"}
                 </Typography>
                 <Typography>
                   Video Count:{" "}
-                  {channelStatistics.videoCount
-                    ? tempNFormatter(channelStatistics.videoCount)
+                  {channelStats?.videoCount
+                    ? tempNFormatter(channelStats.videoCount)
                     : "ERROR"}
                 </Typography>
                 <Typography variant="h6" component="h6">

@@ -5,9 +5,9 @@ export const getSubscriptions = async () => {
   });
 };
 
-export const getChannelById = async (ids: string) => {
+export const getChannelByIds = async (ids: string | string[]) => {
   return window.gapi.client.youtube.channels.list({
-    part: "statistics",
+    part: "snippet,statistics",
     id: ids,
   });
 };
