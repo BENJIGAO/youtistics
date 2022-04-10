@@ -1,16 +1,8 @@
-import React from 'react'
-import { getToken } from 'common/utils/authUtils'
+import React from "react";
+import { getToken } from "common/utils/authUtils";
 
-interface IAuthButtonProps {
+const AuthButton = () => {
+  return <button onClick={getToken}>Get Started</button>;
+};
 
-}
-
-const AuthButton: React.FC<IAuthButtonProps> = (props) => {
-  return (
-    <button onClick={getToken}>
-      Get Started
-    </button>
-  );
-}
-
-export default AuthButton
+export default AuthButton;

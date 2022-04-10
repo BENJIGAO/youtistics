@@ -12,7 +12,7 @@ import Dashboard from "features/Dashboard";
 
 export const history = createBrowserHistory();
 
-const App: React.FC = () => {
+const App = () => {
   useEffect(() => {
     loadScript("https://apis.google.com/js/api.js", gapiLoad);
     loadScript("https://accounts.google.com/gsi/client", gisInit);

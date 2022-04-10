@@ -1,8 +1,6 @@
 import * as React from "react";
 
-interface IHomeNavbarProps {}
-
-const HomeNavbar: React.FC<IHomeNavbarProps> = (props) => {
+const HomeNavbar = () => {
   return (
     <div>
       <div>
