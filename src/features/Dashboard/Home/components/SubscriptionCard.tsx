@@ -35,8 +35,12 @@ const SubscriptionCard = ({
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
-  const tempNFormatter = (num: string) => {
-    return nFormatter(parseFloat(num), 1);
+  const localNFormatter = (nummableString: string | undefined): string => {
+    if (nummableString === undefined) {
+      return "ERROR";
+    }
+
+    return nFormatter(parseFloat(nummableString), 1);
   };
 
   return (
@@ -76,22 +80,14 @@ const SubscriptionCard = ({
                   Statistics
                 </Typography>
                 <Typography>
-                  View Count:{" "}
-                  {channelStats?.viewCount
-                    ? tempNFormatter(channelStats.viewCount)
-                    : "ERROR"}
+                  View Count: {localNFormatter(channelStats?.viewCount)}
                 </Typography>
                 <Typography>
                   Subscriber Count:{" "}
-                  {channelStats?.subscriberCount
-                    ? tempNFormatter(channelStats.subscriberCount)
-                    : "ERROR"}
+                  {localNFormatter(channelStats?.subscriberCount)}
                 </Typography>
                 <Typography>
-                  Video Count:{" "}
-                  {channelStats?.videoCount
-                    ? tempNFormatter(channelStats.videoCount)
-                    : "ERROR"}
+                  Video Count: {localNFormatter(channelStats?.videoCount)}
                 </Typography>
                 <Typography variant="h6" component="h6">
                   Description
