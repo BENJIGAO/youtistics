@@ -1,19 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  Avatar,
-  Tooltip,
-  IconButton,
-  Menu,
-  MenuItem,
-  Divider,
-  ListItemIcon,
-} from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
+import Avatar from "@mui/material/Avatar";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
-import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 import Logout from "@mui/icons-material/Logout";
+import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
 
 interface IAppBarProps {
   drawerWidth: number;

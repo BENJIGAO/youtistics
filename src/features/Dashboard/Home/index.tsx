@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 import { Subscription } from "@types";
 import Copyright from "common/components/Copyright";
 import { getSubscriptions } from "common/utils/apiUtils";
-import { Typography, Box } from "@mui/material";
-import SubscriptionCard from "./components/SubscriptionCard";
+import SubscriptionCard from "features/Dashboard/Home/components/SubscriptionCard";
 
 const Home = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
 
+  // Gets users subscriptions on load. Will be refactored to also query for channel statistics
   useEffect(() => {
     getSubscriptions()
       .then((res) => setSubscriptions(res.result.items ?? []))

@@ -1,7 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
-import HomeNavbar from "features/Home/Navbar";
 import AuthButton from "features/Home/AuthButton";
+import HomeNavbar from "features/Home/Navbar";
 
 const Home = () => {
   return (

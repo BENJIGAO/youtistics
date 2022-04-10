@@ -7,11 +7,11 @@ import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import HomeIcon from "@mui/icons-material/Home";
-import ThumbUpIcon from "@mui/icons-material/ThumbUp";
-import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import InsightsIcon from "@mui/icons-material/Insights";
+import HomeIcon from "@mui/icons-material/Home";
+import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import YoutisticsLogo from "common/components/YoutisticsLogo";
 
 interface IDrawerProps {

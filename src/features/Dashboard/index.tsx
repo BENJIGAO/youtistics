@@ -1,13 +1,13 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Box from "@mui/material/Box";
 import AppBar from "features/Dashboard/components/AppBar";
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+import Channels from "features/Dashboard/Channels";
 import Drawer from "features/Dashboard/components/Drawer";
 import Home from "features/Dashboard/Home";
-import Channels from "./Channels";
-import LikedVideos from "./LikedVideos";
-import Statistics from "./Statistics";
-import Subscriptions from "./Subscriptions";
-import Toolbar from "@mui/material/Toolbar";
+import LikedVideos from "features/Dashboard/LikedVideos";
+import Statistics from "features/Dashboard/Statistics";
+import Subscriptions from "features/Dashboard/Subscriptions";
 
 const drawerWidth = 250;
 
