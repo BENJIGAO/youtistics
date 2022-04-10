@@ -13,11 +13,15 @@ import ReactCardFlip from "react-card-flip";
 import { ChannelStatistics } from "@types";
 import ImageNotFound from "assets/ImageNotFound.jpg";
 import { getChannelById } from "common/utils/apiUtils";
+import { nFormatter } from "common/utils/generalUtils";
 import SubscriptionModal from "features/Dashboard/Home/components/SubscriptionModal";
+
+const CHANNEL_DESC_CUTOFF = 150;
 
 const CustomCard = styled(Card)(() => ({
   height: 320,
 }));
+
 interface ISubscriptionCard {
   channelId?: string;
   channelTitle?: string;
@@ -39,6 +43,7 @@ const SubscriptionCard = ({
 
   console.log(channelStatistics);
 
+  // will refactor to include the channel statistic fetching logic in the parent component
   useEffect(() => {
     if (channelId !== undefined) {
       getChannelById(channelId)
@@ -50,6 +55,11 @@ const SubscriptionCard = ({
         .catch((err) => console.log(err));
     }
   }, [channelId]);
+
+  const tempNFormatter = (num: string) => {
+    return nFormatter(parseFloat(num), 1);
+  };
+
   return (
     <>
       <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
@@ -86,23 +96,39 @@ const SubscriptionCard = ({
                 Statistics
               </Typography>
               <Typography>
-                Subscriber Count: {channelStatistics.subscriberCount}
+                View Count:{" "}
+                {channelStatistics.viewCount
+                  ? tempNFormatter(channelStatistics.viewCount)
+                  : "ERROR"}
               </Typography>
               <Typography>
-                Video Count: {channelStatistics.videoCount}
+                Subscriber Count:{" "}
+                {channelStatistics.subscriberCount
+                  ? tempNFormatter(channelStatistics.subscriberCount)
+                  : "ERROR"}
               </Typography>
-              <Typography>View Count: {channelStatistics.viewCount}</Typography>
+              <Typography>
+                Video Count:{" "}
+                {channelStatistics.videoCount
+                  ? tempNFormatter(channelStatistics.videoCount)
+                  : "ERROR"}
+              </Typography>
               <Typography variant="h6" component="h6">
                 Description
               </Typography>
               <Typography>
-                {channelDescription ? channelDescription.substring(0, 150) : ""}
-                <Button
-                  onClick={() => setIsModalOpen(true)}
-                  sx={{ display: "inline", minWidth: 0, padding: 0 }}
-                >
-                  ...
-                </Button>
+                {channelDescription
+                  ? channelDescription.substring(0, CHANNEL_DESC_CUTOFF)
+                  : ""}
+                {channelDescription?.length &&
+                  channelDescription.length > CHANNEL_DESC_CUTOFF && (
+                    <Button
+                      onClick={() => setIsModalOpen(true)}
+                      sx={{ display: "inline", minWidth: 0, padding: 0 }}
+                    >
+                      ...
+                    </Button>
+                  )}
               </Typography>
             </CardContent>
           </CustomCard>
