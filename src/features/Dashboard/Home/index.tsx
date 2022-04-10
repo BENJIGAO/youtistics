@@ -11,16 +11,14 @@ const Home = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [channelStats, setChannelStats] = useState<ChannelStatistics[]>([]);
 
-  // Gets users subscriptions on load. Will be refactored to also query for channel statistics
+  // Gets users subscriptions on load
   useEffect(() => {
-    getSubscriptions()
-      .then((res) => {
-        setSubscriptions(res.result.items ?? []);
-      })
-      .catch((err) => console.log(err));
+    getSubscriptions().then((subscriptions) =>
+      setSubscriptions(subscriptions ?? [])
+    );
   }, []);
 
-  // Set channelStats when subscriptions is populated so it can be used as a reference array for sorting
+  // Set channelStats when subscriptions is populated because it needs it for sorting as a reference array
   useEffect(() => {
     setChannelStatsWithSubscriptions(subscriptions);
   }, [subscriptions]);
@@ -35,9 +33,9 @@ const Home = () => {
       .map((sub) => sub.snippet?.resourceId?.channelId)
       .filter((id): id is string => id !== undefined);
 
-    getChannelByIds(subscriptionIds)
-      .then((res) => sortAndSetChannelStats(res.result.items))
-      .catch((err) => console.log(err));
+    getChannelByIds(subscriptionIds).then((channels) =>
+      sortAndSetChannelStats(channels)
+    );
   };
 
   const sortAndSetChannelStats = (channels: Channel[] | undefined) => {
