@@ -84,6 +84,7 @@ const Home = () => {
               1200: { slidesPerView: 4 },
               1536: { slidesPerView: 5 },
             }}
+            simulateTouch={false}
             navigation
           >
             {subscriptions.map((sub, index) => {
