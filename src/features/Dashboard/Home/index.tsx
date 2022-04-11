@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -6,6 +8,9 @@ import { Subscription, ChannelStatistics, Channel } from "@types";
 import Copyright from "common/components/Copyright";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import SubscriptionCard from "features/Dashboard/Home/components/SubscriptionCard";
+
+import "swiper/css";
+import "swiper/css/navigation";
 
 const Home = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
@@ -68,32 +73,39 @@ const Home = () => {
             Recent Subscriptions
           </Typography>
         </Grid>
-        <Grid item container xs={12} spacing={3}>
-          {subscriptions.map((sub, index) => {
-            return (
-              <Grid item xs={12} sm={6} md={4} lg={3} xl={2.4} key={index}>
-                <SubscriptionCard
-                  channelTitle={sub.snippet?.title}
-                  channelDescription={sub.snippet?.description}
-                  channelImageUrl={sub.snippet?.thumbnails?.high?.url}
-                  channelStats={channelStats[index]}
-                />
-              </Grid>
-            );
-          })}
+        <Grid item xs={12} spacing={3} sx={{ m: 0, pr: 5 }}>
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={15}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              600: { slidesPerView: 2 },
+              900: { slidesPerView: 3 },
+              1200: { slidesPerView: 4 },
+              1536: { slidesPerView: 5 },
+            }}
+            navigation
+          >
+            {subscriptions.map((sub, index) => {
+              return (
+                <SwiperSlide>
+                  <SubscriptionCard
+                    channelTitle={sub.snippet?.title}
+                    channelDescription={sub.snippet?.description}
+                    channelImageUrl={sub.snippet?.thumbnails?.high?.url}
+                    channelStats={channelStats[index]}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </Grid>
         <Grid item xs={12}>
           <Typography component="h2" variant="h4">
             Recent Liked Videos
           </Typography>
         </Grid>
-        <Grid item container xs={12}>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-          <Grid item xs={2.4}></Grid>
-        </Grid>
+        <Grid item xs={12}></Grid>
       </Grid>
       <Copyright sx={{ pt: 4 }} />
     </Box>
