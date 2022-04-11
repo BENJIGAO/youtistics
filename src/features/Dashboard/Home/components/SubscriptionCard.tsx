@@ -46,7 +46,7 @@ const SubscriptionCard = ({
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
-        <CustomCard key="front">
+        <CustomCard key="front" sx={{ position: "relative" }}>
           <CardMedia
             sx={{ maxHeight: 200 }}
             component="img"
@@ -59,7 +59,7 @@ const SubscriptionCard = ({
               {channelTitle}
             </Typography>
           </CardContent>
-          <CardActions>
+          <CardActions sx={{ position: "absolute", bottom: 4, left: 4 }}>
             <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
               Learn More
             </Button>
@@ -73,7 +73,7 @@ const SubscriptionCard = ({
               <ArrowBackIosNewIcon fontSize="small" color="primary" />
             </IconButton>
           </CardActions>
-          <CardContent sx={{ py: 0, height: "90%" }}>
+          <CardContent sx={{ py: 0, height: "80%" }}>
             <OverlayScrollbar>
               <Box sx={{ pr: 2 }}>
                 <Typography variant="h6" component="h4">
@@ -92,7 +92,9 @@ const SubscriptionCard = ({
                 <Typography variant="h6" component="h6">
                   Description
                 </Typography>
-                <Typography>{channelDescription}</Typography>
+                <Typography>
+                  {channelDescription !== "" ? channelDescription : "N/A"}
+                </Typography>
               </Box>
             </OverlayScrollbar>
           </CardContent>
