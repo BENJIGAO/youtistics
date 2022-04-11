@@ -4,6 +4,10 @@ interface ICache {
   [key: string]: Subscription[] | Channel[];
 }
 
+interface IParams {
+  [key: string]: string | string[];
+}
+
 /**
  * The format of the cache key will be the following:
  * <resource_type>.<method>?<dynamic_param_1>=<dynamic_param_1_value>...<dynamic_param_1>=<dynamic_param_1_value>
@@ -17,8 +21,10 @@ interface ICache {
  */
 const cache: ICache = {};
 
-export const getSubscriptions = async () => {
-  const SUBSCRIPTIONS_LIST_KEY = "subscriptions.list";
+export const getSubscriptions = async (maxResults: number) => {
+  const SUBSCRIPTIONS_LIST_KEY = getUniqueKey("subscriptions", "list", {
+    maxResults: maxResults.toString(),
+  });
   if (cache[SUBSCRIPTIONS_LIST_KEY] !== undefined) {
     return cache[SUBSCRIPTIONS_LIST_KEY];
   }
@@ -26,6 +32,7 @@ export const getSubscriptions = async () => {
     const response = await window.gapi.client.youtube.subscriptions.list({
       part: "snippet",
       mine: true,
+      maxResults: maxResults,
     });
     if (response.result.items !== undefined) {
       cache[SUBSCRIPTIONS_LIST_KEY] = response.result.items;
@@ -37,7 +44,9 @@ export const getSubscriptions = async () => {
 };
 
 export const getChannelByIds = async (ids: string | string[]) => {
-  const CHANNELS_LIST_KEY = "channels.list";
+  const CHANNELS_LIST_KEY = getUniqueKey("channels", "list", {
+    id: ids,
+  });
   if (cache[CHANNELS_LIST_KEY] !== undefined) {
     return cache[CHANNELS_LIST_KEY];
   }
@@ -53,4 +62,17 @@ export const getChannelByIds = async (ids: string | string[]) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+const getUniqueKey = (
+  resource: string,
+  method: "list",
+  params: IParams
+): string => {
+  let formattedParams: string = "";
+  for (const [key, value] of Object.entries(params)) {
+    formattedParams +=
+      key + "=" + (typeof value === "string" ? value : value.join(","));
+  }
+  return resource + "." + method + "?" + formattedParams;
 };

@@ -18,7 +18,7 @@ const Home = () => {
 
   // Gets users subscriptions on load
   useEffect(() => {
-    getSubscriptions().then((subscriptions) =>
+    getSubscriptions(15).then((subscriptions) =>
       setSubscriptions(subscriptions ?? [])
     );
   }, []);
