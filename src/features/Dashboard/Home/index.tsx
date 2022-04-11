@@ -89,7 +89,7 @@ const Home = () => {
           >
             {subscriptions.map((sub, index) => {
               return (
-                <SwiperSlide>
+                <SwiperSlide key={index}>
                   <SubscriptionCard
                     channelTitle={sub.snippet?.title}
                     channelDescription={sub.snippet?.description}
