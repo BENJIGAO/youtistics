@@ -3,7 +3,10 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import { Subscription, ChannelStatistics, Channel } from "@types";
 import Copyright from "common/components/Copyright";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
@@ -73,8 +76,9 @@ const Home = () => {
             Recent Subscriptions
           </Typography>
         </Grid>
-        <Grid item xs={12} spacing={3} sx={{ m: 0, pr: 5 }}>
+        <Grid item xs={12} sx={{ m: 0, pr: 5 }}>
           <Swiper
+            style={{ position: "relative" }}
             modules={[Navigation]}
             spaceBetween={15}
             breakpoints={{
@@ -85,7 +89,7 @@ const Home = () => {
               1536: { slidesPerView: 5 },
             }}
             simulateTouch={false}
-            navigation
+            navigation={{ nextEl: ".next", prevEl: ".prev" }}
           >
             {subscriptions.map((sub, index) => {
               return (
@@ -99,6 +103,18 @@ const Home = () => {
                 </SwiperSlide>
               );
             })}
+            <IconButton
+              sx={{ position: "absolute", zIndex: 10, bottom: "45%", right: 0 }}
+              className="next"
+            >
+              <NavigateNextIcon sx={{ fontSize: 50 }} color="primary" />
+            </IconButton>
+            <IconButton
+              sx={{ position: "absolute", zIndex: 10, bottom: "45%", left: 0 }}
+              className="prev"
+            >
+              <NavigateBeforeIcon sx={{ fontSize: 50 }} color="primary" />
+            </IconButton>
           </Swiper>
         </Grid>
         <Grid item xs={12}>
