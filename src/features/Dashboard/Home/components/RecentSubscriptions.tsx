@@ -17,6 +17,7 @@ const RecentSubscriptions = () => {
   // Gets users subscriptions on load
   useEffect(() => {
     getSubscriptions(15).then((subscriptions) =>
+      // @ts-ignore
       setSubscriptions(subscriptions ?? [])
     );
   }, []);
