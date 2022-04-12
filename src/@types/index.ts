@@ -1,27 +1,7 @@
-/*
---------------------------------
-Subscription
---------------------------------
-*/
+/**
+ * Subscription
+ */
 
-export interface SubscriptionListResponse {
-  /** Etag of this resource. */
-  etag?: string;
-  /** Serialized EventId of the request which produced this response. */
-  eventId?: string;
-  /** A list of subscriptions that match the request criteria. */
-  items?: Subscription[];
-  /** Identifies what kind of resource this is. Value: the fixed string "youtube#subscriptionListResponse". */
-  kind?: string;
-  /** The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set. */
-  nextPageToken?: string;
-  pageInfo?: PageInfo;
-  /** The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set. */
-  prevPageToken?: string;
-  tokenPagination?: any;
-  /** The visitorId identifies the visitor. */
-  visitorId?: string;
-}
 export interface Subscription {
   /** The contentDetails object contains basic statistics about the subscription. */
   contentDetails?: SubscriptionContentDetails;
@@ -73,18 +53,6 @@ export interface SubscriptionSubscriberSnippet {
   /** The title of the subscriber. */
   title?: string;
 }
-export interface ThumbnailDetails {
-  /** The default image for this resource. */
-  default?: Thumbnail;
-  /** The high quality image for this resource. */
-  high?: Thumbnail;
-  /** The maximum resolution quality image for this resource. */
-  maxres?: Thumbnail;
-  /** The medium quality image for this resource. */
-  medium?: Thumbnail;
-  /** The standard quality image for this resource. */
-  standard?: Thumbnail;
-}
 export interface Thumbnail {
   /** (Optional) Height of the thumbnail image. */
   height?: number;
@@ -104,30 +72,11 @@ export interface ResourceId {
   videoId?: string;
 }
 
-/*
---------------------------------
-Channel
---------------------------------
-*/
+/**
+ * Channel
+ */
 
-export interface ChannelListResponse {
-  /** Etag of this resource. */
-  etag?: string;
-  /** Serialized EventId of the request which produced this response. */
-  eventId?: string;
-  items?: Channel[];
-  /** Identifies what kind of resource this is. Value: the fixed string "youtube#channelListResponse". */
-  kind?: string;
-  /** The token that can be used as the value of the pageToken parameter to retrieve the next page in the result set. */
-  nextPageToken?: string;
-  /** General pagination information. */
-  pageInfo?: PageInfo;
-  /** The token that can be used as the value of the pageToken parameter to retrieve the previous page in the result set. */
-  prevPageToken?: string;
-  tokenPagination?: any;
-  /** The visitorId identifies the visitor. */
-  visitorId?: string;
-}
+// omitted some properties for brevity
 export interface Channel {
   /** Etag of this resource. */
   etag?: string;
@@ -203,15 +152,87 @@ export interface ChannelTopicDetails {
   topicIds?: string[];
 }
 
-/*
---------------------------------
-General
---------------------------------
-*/
+/**
+ * PlaylistItem
+ */
 
-interface PageInfo {
-  /** The number of results included in the API response. */
-  resultsPerPage?: number;
-  /** The total number of results in the result set. */
-  totalResults?: number;
+export interface PlaylistItem {
+  /** The contentDetails object is included in the resource if the included item is a YouTube video. The object contains additional information about the video. */
+  contentDetails?: PlaylistItemContentDetails;
+  /** Etag of this resource. */
+  etag?: string;
+  /** The ID that YouTube uses to uniquely identify the playlist item. */
+  id?: string;
+  /** Identifies what kind of resource this is. Value: the fixed string "youtube#playlistItem". */
+  kind?: string;
+  /** The snippet object contains basic details about the playlist item, such as its title and position in the playlist. */
+  snippet?: PlaylistItemSnippet;
+  /** The status object contains information about the playlist item's privacy status. */
+  status?: PlaylistItemStatus;
+}
+export interface PlaylistItemContentDetails {
+  /**
+   * The time, measured in seconds from the start of the video, when the video should stop playing. (The playlist owner can specify the times when the video should start and stop playing
+   * when the video is played in the context of the playlist.) By default, assume that the video.endTime is the end of the video.
+   */
+  endAt?: string;
+  /** A user-generated note for this item. */
+  note?: string;
+  /**
+   * The time, measured in seconds from the start of the video, when the video should start playing. (The playlist owner can specify the times when the video should start and stop
+   * playing when the video is played in the context of the playlist.) The default value is 0.
+   */
+  startAt?: string;
+  /** The ID that YouTube uses to uniquely identify a video. To retrieve the video resource, set the id query parameter to this value in your API request. */
+  videoId?: string;
+  /** The date and time that the video was published to YouTube. */
+  videoPublishedAt?: string;
+}
+export interface PlaylistItemSnippet {
+  /** The ID that YouTube uses to uniquely identify the user that added the item to the playlist. */
+  channelId?: string;
+  /** Channel title for the channel that the playlist item belongs to. */
+  channelTitle?: string;
+  /** The item's description. */
+  description?: string;
+  /** The ID that YouTube uses to uniquely identify thGe playlist that the playlist item is in. */
+  playlistId?: string;
+  /** The order in which the item appears in the playlist. The value uses a zero-based index, so the first item has a position of 0, the second item has a position of 1, and so forth. */
+  position?: number;
+  /** The date and time that the item was added to the playlist. */
+  publishedAt?: string;
+  /** The id object contains information that can be used to uniquely identify the resource that is included in the playlist as the playlist item. */
+  resourceId?: ResourceId;
+  /**
+   * A map of thumbnail images associated with the playlist item. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other
+   * information about the thumbnail.
+   */
+  thumbnails?: ThumbnailDetails;
+  /** The item's title. */
+  title?: string;
+  /** Channel id for the channel this video belongs to. */
+  videoOwnerChannelId?: string;
+  /** Channel title for the channel this video belongs to. */
+  videoOwnerChannelTitle?: string;
+}
+export interface PlaylistItemStatus {
+  /** This resource's privacy status. */
+  privacyStatus?: string;
+}
+
+/**
+ * General
+ */
+
+export interface ThumbnailDetails {
+  /** The default image for this resource. */
+  default?: Thumbnail;
+  /** The high quality image for this resource. */
+  high?: Thumbnail;
+  /** The maximum resolution quality image for this resource. */
+  maxres?: Thumbnail;
+  /** The medium quality image for this resource. */
+  medium?: Thumbnail;
+  /** The standard quality image for this resource. */
+  standard?: Thumbnail;
 }
