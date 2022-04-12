@@ -5,6 +5,9 @@ import Copyright from "common/components/Copyright";
 import RecentSubscriptions from "features/Dashboard/Home/components/RecentSubscriptions";
 import RecentLikedVideos from "features/Dashboard/Home/components/RecentLikedVideos";
 
+import "swiper/css";
+import "swiper/css/navigation";
+
 const Home = () => {
   return (
     <Box sx={{ m: 4 }}>

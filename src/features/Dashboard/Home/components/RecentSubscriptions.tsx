@@ -10,9 +10,6 @@ import { Subscription, ChannelStatistics, Channel } from "@types";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import SubscriptionCard from "features/Dashboard/Home/components/SubscriptionCard";
 
-import "swiper/css";
-import "swiper/css/navigation";
-
 const RecentSubscriptions = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [channelStats, setChannelStats] = useState<ChannelStatistics[]>([]);
