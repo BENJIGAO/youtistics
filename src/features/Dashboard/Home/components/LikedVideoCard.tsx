@@ -47,7 +47,11 @@ const LikedVideoCard = ({
             onError={(e: any) => (e.target.value = ImageNotFound)}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              sx={{ fontSize: "subtitle1.fontSize" }}
+              gutterBottom
+              component="div"
+            >
               {channelTitle}
             </Typography>
           </CardContent>
