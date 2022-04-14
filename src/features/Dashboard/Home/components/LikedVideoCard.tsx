@@ -52,7 +52,19 @@ const LikedVideoCard = ({
             </Typography>
           </CardContent>
           <CardActions sx={{ position: "absolute", bottom: 4, left: 4 }}>
-            <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
+            <Button
+              sx={{
+                "&:hover": {
+                  opacity: "100%",
+                  backgroundColor: "grey.50",
+                },
+                opacity: "50%",
+                boxShadow: 3,
+              }}
+              variant="outlined"
+              onClick={() => setIsFlipped(!isFlipped)}
+              size="small"
+            >
               Learn More
             </Button>
           </CardActions>

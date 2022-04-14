@@ -60,7 +60,19 @@ const SubscriptionCard = ({
             </Typography>
           </CardContent>
           <CardActions sx={{ position: "absolute", bottom: 4, left: 4 }}>
-            <Button onClick={() => setIsFlipped(!isFlipped)} size="small">
+            <Button
+              sx={{
+                "&:hover": {
+                  opacity: "100%",
+                  transition: "opacity 0.5s",
+                },
+                opacity: "50%",
+                boxShadow: 3,
+              }}
+              variant="outlined"
+              onClick={() => setIsFlipped(!isFlipped)}
+              size="small"
+            >
               Learn More
             </Button>
           </CardActions>
