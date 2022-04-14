@@ -12,6 +12,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import Logout from "@mui/icons-material/Logout";
 import SwitchAccountIcon from "@mui/icons-material/SwitchAccount";
+import { getToken } from "common/utils/authUtils";
 
 interface IAppBarProps {
   drawerWidth: number;
@@ -96,11 +97,11 @@ const AppBar = ({ drawerWidth }: IAppBarProps) => {
             Profile
           </MenuItem>
           <Divider />
-          <MenuItem onClick={() => navigate("/home")}>
+          <MenuItem onClick={() => getToken()}>
             <ListItemIcon>
               <SwitchAccountIcon fontSize="small" />
             </ListItemIcon>
-            Switch Accounts
+            Re-authenticate
           </MenuItem>
           <MenuItem onClick={() => navigate("/home")}>
             <ListItemIcon>
