@@ -11,7 +11,9 @@ const RecentLikedVideos = () => {
 
   // Gets liked videos on load
   useEffect(() => {
+    let abortController = new AbortController();
     getLikedVideos(15).then((likedVideos) => setLikedVideos(likedVideos ?? []));
+    return () => abortController.abort();
   }, []);
 
   return (

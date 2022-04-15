@@ -12,14 +12,18 @@ const RecentSubscriptions = () => {
 
   // Gets users subscriptions on load
   useEffect(() => {
+    let abortController = new AbortController();
     getSubscriptions(15).then((subscriptions) =>
       setSubscriptions(subscriptions ?? [])
     );
+    return () => abortController.abort();
   }, []);
 
   // Set channelStats when subscriptions is populated because it needs it for sorting as a reference array
   useEffect(() => {
+    let abortController = new AbortController();
     setChannelStatsWithSubscriptions(subscriptions);
+    return () => abortController.abort();
   }, [subscriptions]);
 
   const setChannelStatsWithSubscriptions = (
