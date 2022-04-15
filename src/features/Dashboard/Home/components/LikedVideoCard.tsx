@@ -35,14 +35,6 @@ const LikedVideoCard = ({
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
-  const localNFormatter = (nummableString: string | undefined): string => {
-    if (nummableString === undefined) {
-      return "ERROR";
-    }
-
-    return nFormatter(parseFloat(nummableString), 1);
-  };
-
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <Tooltip title={videoTitle ?? "Loading..."} placement="bottom">
@@ -96,13 +88,13 @@ const LikedVideoCard = ({
                   Statistics
                 </Typography>
                 <Typography>
-                  View Count: {localNFormatter(videoStats?.viewCount)}
+                  View Count: {nFormatter(videoStats?.viewCount, 1)}
                 </Typography>
                 <Typography>
-                  Liked Count: {localNFormatter(videoStats?.likeCount)}
+                  Liked Count: {nFormatter(videoStats?.likeCount, 1)}
                 </Typography>
                 <Typography>
-                  Comment Count: {localNFormatter(videoStats?.commentCount)}
+                  Comment Count: {nFormatter(videoStats?.commentCount, 1)}
                 </Typography>
                 <Typography variant="h6" component="h6">
                   Description

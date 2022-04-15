@@ -35,14 +35,6 @@ const SubscriptionCard = ({
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
-  const localNFormatter = (nummableString: string | undefined): string => {
-    if (nummableString === undefined) {
-      return "ERROR";
-    }
-
-    return nFormatter(parseFloat(nummableString), 1);
-  };
-
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
@@ -92,14 +84,14 @@ const SubscriptionCard = ({
                   Statistics
                 </Typography>
                 <Typography>
-                  View Count: {localNFormatter(channelStats?.viewCount)}
+                  View Count: {nFormatter(channelStats?.viewCount, 1)}
                 </Typography>
                 <Typography>
                   Subscriber Count:{" "}
-                  {localNFormatter(channelStats?.subscriberCount)}
+                  {nFormatter(channelStats?.subscriberCount, 1)}
                 </Typography>
                 <Typography>
-                  Video Count: {localNFormatter(channelStats?.videoCount)}
+                  Video Count: {nFormatter(channelStats?.videoCount, 1)}
                 </Typography>
                 <Typography variant="h6" component="h6">
                   Description

@@ -1,4 +1,12 @@
-export const nFormatter = (num: number, digits: number) => {
+export const nFormatter = (
+  numString: string | undefined,
+  digits: number
+): string => {
+  if (numString === undefined) {
+    return "ERROR";
+  }
+
+  const num = parseFloat(numString);
   const lookup = [
     { value: 1e9, symbol: "B" },
     { value: 1e6, symbol: "M" },

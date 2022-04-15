@@ -8,7 +8,7 @@ import SwiperWrapper from "./SwiperWrapper";
 const RecentLikedVideos = () => {
   const [likedVideos, setLikedVideos] = useState<Video[]>([]);
 
-  // Gets users subscriptions on load
+  // Gets liked videos on load
   useEffect(() => {
     getLikedVideos(15).then((likedVideos) => setLikedVideos(likedVideos ?? []));
   }, []);
