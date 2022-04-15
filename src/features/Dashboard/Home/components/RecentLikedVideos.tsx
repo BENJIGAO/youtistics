@@ -1,4 +1,4 @@
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import Typography from "@mui/material/Typography";
 import { Video } from "@types";
@@ -56,4 +56,4 @@ const RecentLikedVideos = () => {
   );
 };
 
-export default memo(RecentLikedVideos);
+export default RecentLikedVideos;

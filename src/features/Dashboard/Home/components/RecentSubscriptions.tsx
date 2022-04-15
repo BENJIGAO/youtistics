@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, memo } from "react";
+import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import Typography from "@mui/material/Typography";
 import { Subscription, ChannelStatistics, Channel } from "@types";
@@ -9,13 +9,16 @@ import CardWrapper from "./CardWrapper";
 const RecentSubscriptions = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [channelStats, setChannelStats] = useState<ChannelStatistics[]>([]);
+  console.log(channelStats);
 
   // Gets users subscriptions on load
   useEffect(() => {
     let abortController = new AbortController();
-    getSubscriptions(15).then((subscriptions) =>
-      setSubscriptions(subscriptions ?? [])
-    );
+    getSubscriptions(15).then((subscriptions) => {
+      if (subscriptions !== undefined) {
+        setSubscriptions(subscriptions);
+      }
+    });
     return () => abortController.abort();
   }, []);
 
@@ -37,8 +40,10 @@ const RecentSubscriptions = () => {
       .filter((id): id is string => id !== undefined);
 
     getChannelByIds(subscriptionIds).then((channels) => {
-      const sortedStatistics = sortChannelStats(channels);
-      setChannelStats(sortedStatistics);
+      if (channels !== undefined) {
+        const sortedStatistics = sortChannelStats(channels);
+        setChannelStats(sortedStatistics);
+      }
     });
   };
 
@@ -108,4 +113,4 @@ const RecentSubscriptions = () => {
   );
 };
 
-export default memo(RecentSubscriptions);
+export default RecentSubscriptions;
