@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { SwiperSlide } from "swiper/react";
 import Typography from "@mui/material/Typography";
 import { Video } from "@types";
@@ -20,7 +20,7 @@ const RecentLikedVideos = () => {
     <SwiperWrapper dataArray={likedVideos}>
       {likedVideos.map((likedVideo, index) => {
         return (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} virtualIndex={index}>
             <CardWrapper
               TitleNode={
                 <Typography
@@ -56,4 +56,4 @@ const RecentLikedVideos = () => {
   );
 };
 
-export default RecentLikedVideos;
+export default memo(RecentLikedVideos);

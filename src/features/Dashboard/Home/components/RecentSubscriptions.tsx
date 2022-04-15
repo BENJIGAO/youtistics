@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo, memo } from "react";
 import { SwiperSlide } from "swiper/react";
 import Typography from "@mui/material/Typography";
 import { Subscription, ChannelStatistics, Channel } from "@types";
@@ -36,14 +36,17 @@ const RecentSubscriptions = () => {
       .map((sub) => sub.snippet?.resourceId?.channelId)
       .filter((id): id is string => id !== undefined);
 
-    getChannelByIds(subscriptionIds).then((channels) =>
-      sortAndSetChannelStats(channels)
-    );
+    getChannelByIds(subscriptionIds).then((channels) => {
+      const sortedStatistics = sortChannelStats(channels);
+      setChannelStats(sortedStatistics);
+    });
   };
 
-  const sortAndSetChannelStats = (channels: Channel[] | undefined) => {
+  const sortChannelStats = (
+    channels: Channel[] | undefined
+  ): ChannelStatistics[] => {
     if (channels === undefined) {
-      return;
+      return [];
     }
     const refArr = subscriptions
       .map((channel) => channel.snippet?.title)
@@ -60,14 +63,14 @@ const RecentSubscriptions = () => {
       .map((channel) => channel.statistics)
       .filter((stats): stats is ChannelStatistics => stats !== undefined);
 
-    setChannelStats(sortedStatistics);
+    return sortedStatistics;
   };
 
   return (
     <SwiperWrapper dataArray={subscriptions}>
       {subscriptions.map((sub, index) => {
         return (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} virtualIndex={index}>
             <CardWrapper
               TitleNode={
                 <Typography gutterBottom variant="h5" component="div">
@@ -105,4 +108,4 @@ const RecentSubscriptions = () => {
   );
 };
 
-export default RecentSubscriptions;
+export default memo(RecentSubscriptions);

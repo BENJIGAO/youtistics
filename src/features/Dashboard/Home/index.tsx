@@ -7,6 +7,7 @@ import RecentLikedVideos from "features/Dashboard/Home/components/RecentLikedVid
 
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/virtual";
 
 const Home = () => {
   return (

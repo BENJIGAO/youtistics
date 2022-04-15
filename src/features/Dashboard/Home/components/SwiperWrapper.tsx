@@ -1,5 +1,5 @@
 import React from "react";
-import { Navigation } from "swiper";
+import { Navigation, Virtual } from "swiper";
 import { Swiper } from "swiper/react";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
@@ -19,7 +19,7 @@ const SwiperWrapper = ({ dataArray, children }: ISwiperWrapperProps) => {
       {dataArray !== [] ? (
         <Swiper
           style={{ position: "relative" }}
-          modules={[Navigation]}
+          modules={[Navigation, Virtual]}
           spaceBetween={15}
           breakpoints={{
             0: { slidesPerView: 1 },
@@ -30,6 +30,7 @@ const SwiperWrapper = ({ dataArray, children }: ISwiperWrapperProps) => {
           }}
           simulateTouch={false}
           navigation={{ nextEl: ".next", prevEl: ".prev" }}
+          virtual
         >
           {children}
           <IconButton
