@@ -6,12 +6,12 @@ import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { PlaylistItem } from "@types";
+import { Video } from "@types";
 import { getLikedVideos } from "common/utils/apiUtils";
 import LikedVideoCard from "features/Dashboard/Home/components/LikedVideoCard";
 
 const RecentLikedVideos = () => {
-  const [likedVideos, setLikedVideos] = useState<PlaylistItem[]>([]);
+  const [likedVideos, setLikedVideos] = useState<Video[]>([]);
 
   // Gets users subscriptions on load
   useEffect(() => {
@@ -39,9 +39,10 @@ const RecentLikedVideos = () => {
             return (
               <SwiperSlide key={index}>
                 <LikedVideoCard
-                  channelTitle={likedVideo.snippet?.title}
-                  channelDescription={likedVideo.snippet?.description}
-                  channelImageUrl={likedVideo.snippet?.thumbnails?.high?.url}
+                  videoTitle={likedVideo.snippet?.title}
+                  videoDescription={likedVideo.snippet?.description}
+                  videoImageUrl={likedVideo.snippet?.thumbnails?.high?.url}
+                  videoStats={likedVideo.statistics}
                 />
               </SwiperSlide>
             );

@@ -11,7 +11,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { ChannelStatistics } from "@types";
+import { VideoStatistics } from "@types";
 import ImageNotFound from "assets/ImageNotFound.jpg";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
 import { nFormatter } from "common/utils/generalUtils";
@@ -21,29 +21,37 @@ const CustomCard = styled(Card)(() => ({
 }));
 
 interface ISubscriptionCard {
-  channelTitle?: string;
-  channelDescription?: string;
-  channelImageUrl?: string;
-  channelStats?: ChannelStatistics;
+  videoTitle?: string;
+  videoDescription?: string;
+  videoImageUrl?: string;
+  videoStats?: VideoStatistics;
 }
 
 const LikedVideoCard = ({
-  channelTitle,
-  channelDescription,
-  channelImageUrl,
-  channelStats,
+  videoTitle,
+  videoDescription,
+  videoImageUrl,
+  videoStats,
 }: ISubscriptionCard) => {
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
 
+  const localNFormatter = (nummableString: string | undefined): string => {
+    if (nummableString === undefined) {
+      return "ERROR";
+    }
+
+    return nFormatter(parseFloat(nummableString), 1);
+  };
+
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
-      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
+      <Tooltip title={videoTitle ?? "Loading..."} placement="bottom">
         <CustomCard key="front" sx={{ position: "relative" }}>
           <CardMedia
             sx={{ maxHeight: 200 }}
             component="img"
-            image={channelImageUrl}
-            alt={channelTitle}
+            image={videoImageUrl}
+            alt={videoTitle}
             onError={(e: any) => (e.target.value = ImageNotFound)}
           />
           <CardContent>
@@ -52,7 +60,7 @@ const LikedVideoCard = ({
               gutterBottom
               component="div"
             >
-              {channelTitle}
+              {videoTitle}
             </Typography>
           </CardContent>
           <CardActions sx={{ position: "absolute", bottom: 4, left: 4 }}>
@@ -74,13 +82,37 @@ const LikedVideoCard = ({
           </CardActions>
         </CustomCard>
       </Tooltip>
-      <Tooltip title={channelTitle ?? "Loading..."} placement="bottom">
+      <Tooltip title={videoTitle ?? "Loading..."} placement="bottom">
         <CustomCard key="back">
           <CardActions sx={{ pb: 0 }}>
             <IconButton onClick={() => setIsFlipped(!isFlipped)}>
               <ArrowBackIosNewIcon fontSize="small" color="primary" />
             </IconButton>
           </CardActions>
+          <CardContent sx={{ py: 0, height: "80%" }}>
+            <OverlayScrollbar>
+              <Box sx={{ pr: 2 }}>
+                <Typography variant="h6" component="h4">
+                  Statistics
+                </Typography>
+                <Typography>
+                  View Count: {localNFormatter(videoStats?.viewCount)}
+                </Typography>
+                <Typography>
+                  Liked Count: {localNFormatter(videoStats?.likeCount)}
+                </Typography>
+                <Typography>
+                  Comment Count: {localNFormatter(videoStats?.commentCount)}
+                </Typography>
+                <Typography variant="h6" component="h6">
+                  Description
+                </Typography>
+                <Typography>
+                  {videoDescription !== "" ? videoDescription : "N/A"}
+                </Typography>
+              </Box>
+            </OverlayScrollbar>
+          </CardContent>
         </CustomCard>
       </Tooltip>
     </ReactCardFlip>

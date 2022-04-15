@@ -1,7 +1,7 @@
-import { Subscription, Channel, PlaylistItem } from "@types";
+import { Subscription, Channel, Video } from "@types";
 
 interface ICache {
-  [key: string]: Subscription[] | Channel[] | PlaylistItem[];
+  [key: string]: Subscription[] | Channel[] | Video[];
 }
 
 interface IParams {
@@ -65,20 +65,20 @@ export const getChannelByIds = async (ids: string | string[]) => {
 };
 
 export const getLikedVideos = async (maxResults: number) => {
-  const PLAYLIST_ITEMS_LIST_KEY = getUniqueKey("playlistItems", "list", {
+  const VIDEOS_LIST_KEY = getUniqueKey("videos", "list", {
     maxResults: maxResults.toString(),
   });
-  if (cache[PLAYLIST_ITEMS_LIST_KEY] !== undefined) {
-    return cache[PLAYLIST_ITEMS_LIST_KEY] as unknown as PlaylistItem[];
+  if (cache[VIDEOS_LIST_KEY] !== undefined) {
+    return cache[VIDEOS_LIST_KEY] as unknown as Video[];
   }
   try {
-    const response = await window.gapi.client.youtube.playlistItems.list({
-      part: "snippet",
-      playlistId: "LL",
+    const response = await window.gapi.client.youtube.videos.list({
+      part: "snippet,statistics",
+      myRating: "like",
       maxResults: maxResults,
     });
     if (response.result.items !== undefined) {
-      cache[PLAYLIST_ITEMS_LIST_KEY] = response.result.items;
+      cache[VIDEOS_LIST_KEY] = response.result.items;
     }
     return response.result.items;
   } catch (err) {
