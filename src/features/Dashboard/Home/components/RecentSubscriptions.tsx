@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
+import Typography from "@mui/material/Typography";
 import { Subscription, ChannelStatistics, Channel } from "@types";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
-import SubscriptionCard from "features/Dashboard/Home/components/SubscriptionCard";
 import SwiperWrapper from "./SwiperWrapper";
+import CardWrapper from "./CardWrapper";
 
 const RecentSubscriptions = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
@@ -57,16 +58,41 @@ const RecentSubscriptions = () => {
 
     setChannelStats(sortedStatistics);
   };
+
   return (
     <SwiperWrapper dataArray={subscriptions}>
       {subscriptions.map((sub, index) => {
         return (
           <SwiperSlide key={index}>
-            <SubscriptionCard
-              channelTitle={sub.snippet?.title}
-              channelDescription={sub.snippet?.description}
-              channelImageUrl={sub.snippet?.thumbnails?.high?.url}
-              channelStats={channelStats[index]}
+            <CardWrapper
+              TitleNode={
+                <Typography gutterBottom variant="h5" component="div">
+                  {sub.snippet?.title}
+                </Typography>
+              }
+              title={sub.snippet?.title}
+              description={sub.snippet?.description}
+              imageUrl={sub.snippet?.thumbnails?.high?.url}
+              statistics={[
+                {
+                  label: "View Count",
+                  value: channelStats[index]
+                    ? channelStats[index].viewCount
+                    : undefined,
+                },
+                {
+                  label: "Subscriber Count",
+                  value: channelStats[index]
+                    ? channelStats[index].subscriberCount
+                    : undefined,
+                },
+                {
+                  label: "Video Count",
+                  value: channelStats[index]
+                    ? channelStats[index].videoCount
+                    : undefined,
+                },
+              ]}
             />
           </SwiperSlide>
         );

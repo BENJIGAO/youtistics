@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
+import Typography from "@mui/material/Typography";
 import { Video } from "@types";
 import { getLikedVideos } from "common/utils/apiUtils";
-import LikedVideoCard from "features/Dashboard/Home/components/LikedVideoCard";
 import SwiperWrapper from "./SwiperWrapper";
+import CardWrapper from "./CardWrapper";
 
 const RecentLikedVideos = () => {
   const [likedVideos, setLikedVideos] = useState<Video[]>([]);
@@ -18,11 +19,33 @@ const RecentLikedVideos = () => {
       {likedVideos.map((likedVideo, index) => {
         return (
           <SwiperSlide key={index}>
-            <LikedVideoCard
-              videoTitle={likedVideo.snippet?.title}
-              videoDescription={likedVideo.snippet?.description}
-              videoImageUrl={likedVideo.snippet?.thumbnails?.high?.url}
-              videoStats={likedVideo.statistics}
+            <CardWrapper
+              TitleNode={
+                <Typography
+                  sx={{ fontSize: "subtitle1.fontSize" }}
+                  gutterBottom
+                  component="div"
+                >
+                  {likedVideo.snippet?.title}
+                </Typography>
+              }
+              title={likedVideo.snippet?.title}
+              description={likedVideo.snippet?.description}
+              imageUrl={likedVideo.snippet?.thumbnails?.high?.url}
+              statistics={[
+                {
+                  label: "View Count",
+                  value: likedVideo.statistics?.viewCount,
+                },
+                {
+                  label: "Like Count",
+                  value: likedVideo.statistics?.likeCount,
+                },
+                {
+                  label: "Comment Count",
+                  value: likedVideo.statistics?.commentCount,
+                },
+              ]}
             />
           </SwiperSlide>
         );
