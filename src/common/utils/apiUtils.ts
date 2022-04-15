@@ -26,7 +26,7 @@ export const getSubscriptions = async (maxResults: number) => {
     maxResults: maxResults.toString(),
   });
   if (cache[SUBSCRIPTIONS_LIST_KEY] !== undefined) {
-    return cache[SUBSCRIPTIONS_LIST_KEY];
+    return cache[SUBSCRIPTIONS_LIST_KEY] as unknown as Subscription[];
   }
   try {
     const response = await window.gapi.client.youtube.subscriptions.list({
@@ -48,7 +48,7 @@ export const getChannelByIds = async (ids: string | string[]) => {
     id: ids,
   });
   if (cache[CHANNELS_LIST_KEY] !== undefined) {
-    return cache[CHANNELS_LIST_KEY];
+    return cache[CHANNELS_LIST_KEY] as unknown as Channel[];
   }
   try {
     const response = await window.gapi.client.youtube.channels.list({
@@ -69,7 +69,7 @@ export const getLikedVideos = async (maxResults: number) => {
     maxResults: maxResults.toString(),
   });
   if (cache[PLAYLIST_ITEMS_LIST_KEY] !== undefined) {
-    return cache[PLAYLIST_ITEMS_LIST_KEY];
+    return cache[PLAYLIST_ITEMS_LIST_KEY] as unknown as PlaylistItem[];
   }
   try {
     const response = await window.gapi.client.youtube.playlistItems.list({

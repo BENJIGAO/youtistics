@@ -15,7 +15,6 @@ const RecentLikedVideos = () => {
 
   // Gets users subscriptions on load
   useEffect(() => {
-    // @ts-ignore
     getLikedVideos(15).then((likedVideos) => setLikedVideos(likedVideos ?? []));
   }, []);
 
