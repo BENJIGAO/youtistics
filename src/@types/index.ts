@@ -143,6 +143,101 @@ export interface ChannelTopicDetails {
 }
 
 /**
+ * Video
+ */
+
+export interface Video {
+  /** The contentDetails object contains information about the video content, including the length of the video and its aspect ratio. */
+  contentDetails?: VideoContentDetails;
+  /** Etag of this resource. */
+  etag?: string;
+  /** The ID that YouTube uses to uniquely identify the video. */
+  id?: string;
+  /** Identifies what kind of resource this is. Value: the fixed string "youtube#video". */
+  kind?: string;
+  /** The snippet object contains basic details about the video, such as its title, description, and category. */
+  snippet?: VideoSnippet;
+  /** The statistics object contains statistics about the video. */
+  statistics?: VideoStatistics;
+  /** The statistics object contains statistics about the video. */
+  /** The topicDetails object encapsulates information about Freebase topics associated with the video. */
+  topicDetails?: VideoTopicDetails;
+}
+export interface VideoContentDetails {
+  /** The value of captions indicates whether the video has captions or not. */
+  caption?: string;
+  /** The value of definition indicates whether the video is available in high definition or only in standard definition. */
+  definition?: string;
+  /** The value of dimension indicates whether the video is available in 3D or in 2D. */
+  dimension?: string;
+  /**
+   * The length of the video. The tag value is an ISO 8601 duration in the format PT#M#S, in which the letters PT indicate that the value specifies a period of time, and the letters M
+   * and S refer to length in minutes and seconds, respectively. The # characters preceding the M and S letters are both integers that specify the number of minutes (or seconds) of the
+   * video. For example, a value of PT15M51S indicates that the video is 15 minutes and 51 seconds long.
+   */
+  duration?: string;
+  /** Indicates whether the video uploader has provided a custom thumbnail image for the video. This property is only visible to the video uploader. */
+  hasCustomThumbnail?: boolean;
+  /** The value of is_license_content indicates whether the video is licensed content. */
+  licensedContent?: boolean;
+  /** Specifies the projection format of the video. */
+  projection?: string;
+}
+export interface VideoStatistics {
+  /** The number of comments for the video. */
+  commentCount?: string;
+  /** The number of users who have indicated that they disliked the video by giving it a negative rating. */
+  dislikeCount?: string;
+  /** The number of users who currently have the video marked as a favorite video. */
+  favoriteCount?: string;
+  /** The number of users who have indicated that they liked the video by giving it a positive rating. */
+  likeCount?: string;
+  /** The number of times the video has been viewed. */
+  viewCount?: string;
+}
+export interface VideoSnippet {
+  /** The YouTube video category associated with the video. */
+  categoryId?: string;
+  /** The ID that YouTube uses to uniquely identify the channel that the video was uploaded to. */
+  channelId?: string;
+  /** Channel title for the channel that the video belongs to. */
+  channelTitle?: string;
+  /** The default_audio_language property specifies the language spoken in the video's default audio track. */
+  defaultAudioLanguage?: string;
+  /** The language of the videos's default snippet. */
+  defaultLanguage?: string;
+  /** The video's description. @mutable youtube.videos.insert youtube.videos.update */
+  description?: string;
+  /** Indicates if the video is an upcoming/active live broadcast. Or it's "none" if the video is not an upcoming/active live broadcast. */
+  liveBroadcastContent?: string;
+  /** The date and time when the video was uploaded. */
+  publishedAt?: string;
+  /** A list of keyword tags associated with the video. Tags may contain spaces. */
+  tags?: string[];
+  /**
+   * A map of thumbnail images associated with the video. For each object in the map, the key is the name of the thumbnail image, and the value is an object that contains other
+   * information about the thumbnail.
+   */
+  thumbnails?: ThumbnailDetails;
+  /** The video's title. @mutable youtube.videos.insert youtube.videos.update */
+  title?: string;
+}
+export interface VideoTopicDetails {
+  /**
+   * Similar to topic_id, except that these topics are merely relevant to the video. These are topics that may be mentioned in, or appear in the video. You can retrieve information about
+   * each topic using Freebase Topic API.
+   */
+  relevantTopicIds?: string[];
+  /** A list of Wikipedia URLs that provide a high-level description of the video's content. */
+  topicCategories?: string[];
+  /**
+   * A list of Freebase topic IDs that are centrally associated with the video. These are topics that are centrally featured in the video, and it can be said that the video is mainly
+   * about each of these. You can retrieve information about each topic using the < a href="http://wiki.freebase.com/wiki/Topic_API">Freebase Topic API.
+   */
+  topicIds?: string[];
+}
+
+/**
  * PlaylistItem
  */
 
