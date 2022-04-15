@@ -60,7 +60,7 @@ const CardWrapper = ({
                   opacity: "100%",
                   transition: "opacity 0.5s",
                 },
-                opacity: "50%",
+                opacity: "30%",
                 boxShadow: 3,
               }}
               variant="outlined"
