@@ -15,7 +15,7 @@ interface ISwiperWrapperProps {
 
 const SwiperWrapper = ({ dataArray, children }: ISwiperWrapperProps) => {
   return (
-    <Grid item xs={12} sx={{ m: 0, pr: 5 }}>
+    <Grid item xs={12} sx={{ m: 0 }}>
       {dataArray !== [] ? (
         <Swiper
           style={{ position: "relative" }}
