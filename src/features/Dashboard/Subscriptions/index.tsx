@@ -1,5 +1,7 @@
+import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
+
 const Subscriptions = () => {
-  return <div>Subscriptions</div>;
+  return <PieChart />;
 };
 
 export default Subscriptions;

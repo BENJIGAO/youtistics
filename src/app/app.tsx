@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { loadScript, gapiLoad, gisInit } from "common/utils/authUtils";
+import { echartsBootstrap } from "common/utils/chartUtils";
 import Dashboard from "features/Dashboard";
 import Home from "features/Home";
 
@@ -14,8 +15,9 @@ export const history = createBrowserHistory();
 
 const App = () => {
   // Loads GIS and JS API libraries needed to work with Youtube Data API v3
-  // Within a useEffect to allow the code to be in react files and not in .html ones
+  // Initializes echarts to be used throughout the rest of the app
   useEffect(() => {
+    echartsBootstrap();
     loadScript("https://apis.google.com/js/api.js", gapiLoad);
     loadScript("https://accounts.google.com/gsi/client", gisInit);
   }, []);
