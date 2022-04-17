@@ -1,5 +1,5 @@
 import * as echarts from "echarts/core";
-import { BarChart, PieChart } from "echarts/charts";
+import { ScatterChart, PieChart, GaugeChart } from "echarts/charts";
 import {
   GridComponent,
   TooltipComponent,
@@ -11,8 +11,9 @@ import { SVGRenderer } from "echarts/renderers";
 
 export const echartsBootstrap = (): void => {
   echarts.use([
-    BarChart,
+    ScatterChart,
     PieChart,
+    GaugeChart,
     GridComponent,
     TooltipComponent,
     TitleComponent,

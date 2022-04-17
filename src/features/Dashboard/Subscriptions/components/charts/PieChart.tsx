@@ -20,7 +20,7 @@ const PieChart = () => {
       {
         name: "Access From",
         type: "pie",
-        radius: "50%",
+        radius: "75%",
         data: [
           { value: 1048, name: "Search Engine" },
           { value: 735, name: "Direct" },
@@ -40,7 +40,11 @@ const PieChart = () => {
   };
 
   return (
-    <ReactEChartsCore echarts={echarts} option={option} notMerge lazyUpdate />
+    <ReactEChartsCore
+      style={{ height: "100%" }}
+      echarts={echarts}
+      option={option}
+    />
   );
 };
 
