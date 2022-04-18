@@ -2,7 +2,16 @@ import ReactEChartsCore from "echarts-for-react/lib/core";
 import { EChartsOption } from "echarts";
 import * as echarts from "echarts/core";
 
-const PieChart = () => {
+interface ITopicOccurencesForChart {
+  name: string;
+  value: number;
+}
+
+interface IPieChartProps {
+  data: ITopicOccurencesForChart[];
+}
+
+const PieChart = ({ data }: IPieChartProps) => {
   const option: EChartsOption = {
     title: {
       text: "Referer of a Website",
@@ -14,20 +23,17 @@ const PieChart = () => {
     },
     legend: {
       orient: "vertical",
-      left: "left",
+      left: "right",
     },
     series: [
       {
         name: "Access From",
         type: "pie",
         radius: "75%",
-        data: [
-          { value: 1048, name: "Search Engine" },
-          { value: 735, name: "Direct" },
-          { value: 580, name: "Email" },
-          { value: 484, name: "Union Ads" },
-          { value: 300, name: "Video Ads" },
-        ],
+        data: data,
+        label: {
+          show: false,
+        },
         emphasis: {
           itemStyle: {
             shadowBlur: 10,

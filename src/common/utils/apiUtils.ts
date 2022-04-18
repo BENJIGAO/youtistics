@@ -52,7 +52,7 @@ export const getChannelByIds = async (ids: string | string[]) => {
   }
   try {
     const response = await window.gapi.client.youtube.channels.list({
-      part: "snippet,statistics",
+      part: "snippet,statistics,topicDetails",
       id: ids,
     });
     if (response.result.items !== undefined) {
