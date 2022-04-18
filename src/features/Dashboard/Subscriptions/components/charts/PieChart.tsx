@@ -14,8 +14,8 @@ interface IPieChartProps {
 const PieChart = ({ data }: IPieChartProps) => {
   const option: EChartsOption = {
     title: {
-      text: "Referer of a Website",
-      subtext: "Fake Data",
+      text: "Subscription Topics",
+      subtext: "Based on your personal preference",
       left: "center",
     },
     tooltip: {

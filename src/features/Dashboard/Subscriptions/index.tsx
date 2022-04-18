@@ -10,7 +10,7 @@ import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
 import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
-import { topicIdMap } from "./topicIdMap";
+import { groupedIdMap } from "./topicIdMap";
 
 interface ITopicOccurences {
   [key: string]: number;
@@ -59,9 +59,14 @@ const Subscriptions = () => {
     channels.forEach((channel) => {
       const topicIds = channel.topicDetails?.topicIds ?? [];
       topicIds.forEach((topicId) => {
-        occurences[topicIdMap[topicId]] !== undefined
-          ? occurences[topicIdMap[topicId]]++
-          : (occurences[topicIdMap[topicId]] = 1);
+        for (const [groupName, idMap] of Object.entries(groupedIdMap)) {
+          if (idMap[topicId] !== undefined) {
+            occurences[groupName] !== undefined
+              ? occurences[groupName]++
+              : (occurences[groupName] = 1);
+            break;
+          }
+        }
       });
     });
 
