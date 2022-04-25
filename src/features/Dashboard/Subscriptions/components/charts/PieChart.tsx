@@ -2,6 +2,11 @@ import ReactEChartsCore from "echarts-for-react/lib/core";
 import { EChartsOption } from "echarts";
 import * as echarts from "echarts/core";
 
+interface ITooltipFormatterParams {
+  name: string
+  value: number
+  percent: number
+}
 interface ITopicOccurencesForChart {
   name: string;
   value: number;
@@ -14,12 +19,21 @@ interface IPieChartProps {
 const PieChart = ({ data }: IPieChartProps) => {
   const option: EChartsOption = {
     title: {
-      text: "Subscription Topics",
-      subtext: "Based on your personal preference",
+      text: "Subscription Topic Distribution",
       left: "center",
     },
     tooltip: {
-      trigger: "item",
+      formatter: (untypedParams: any, _ticket: string): HTMLElement[] => {
+        const params = untypedParams as ITooltipFormatterParams
+        const categoryLabel = document.createElement('div')
+        const percentage = document.createElement('div')
+
+        categoryLabel.innerText = params.name
+        percentage.innerText = `${params.percent.toString()}% (${params.value})`
+        percentage.style.fontWeight = 'bold'
+
+        return [categoryLabel, percentage]
+      }
     },
     legend: {
       orient: "vertical",
