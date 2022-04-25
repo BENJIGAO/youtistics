@@ -3,9 +3,9 @@ import { EChartsOption } from "echarts";
 import * as echarts from "echarts/core";
 
 interface ITooltipFormatterParams {
-  name: string
-  value: number
-  percent: number
+  name: string;
+  value: number;
+  percent: number;
 }
 interface ITopicOccurencesForChart {
   name: string;
@@ -21,23 +21,36 @@ const PieChart = ({ data }: IPieChartProps) => {
     title: {
       text: "Subscription Topic Distribution",
       left: "center",
+      textStyle: {
+        fontFamily: "Roboto",
+        fontSize: 20,
+      },
     },
     tooltip: {
       formatter: (untypedParams: any, _ticket: string): HTMLElement[] => {
-        const params = untypedParams as ITooltipFormatterParams
-        const categoryLabel = document.createElement('div')
-        const percentage = document.createElement('div')
+        const params = untypedParams as ITooltipFormatterParams;
+        const categoryLabel = document.createElement("div");
+        const percentage = document.createElement("div");
 
-        categoryLabel.innerText = params.name
-        percentage.innerText = `${params.percent.toString()}% (${params.value})`
-        percentage.style.fontWeight = 'bold'
+        categoryLabel.innerText = params.name;
+        percentage.innerText = `${params.percent.toString()}% (${
+          params.value
+        })`;
+        percentage.style.fontWeight = "bold";
 
-        return [categoryLabel, percentage]
-      }
+        return [categoryLabel, percentage];
+      },
+      textStyle: {
+        fontFamily: "Roboto",
+      },
     },
     legend: {
       orient: "vertical",
       left: "right",
+      textStyle: {
+        fontFamily: "Roboto",
+        fontSize: 14,
+      },
     },
     series: [
       {
