@@ -6,6 +6,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Subscription, Channel } from "@types";
 import Copyright from "common/components/Copyright";
+import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
@@ -25,6 +26,7 @@ const Subscriptions = () => {
   const [topicOccurencesForChart, setTopicOccurencesForChart] = useState<
     ITopicOccurencesForChart[]
   >([]);
+
   // Gets users subscriptions on load
   useEffect(() => {
     let abortController = new AbortController();
@@ -91,7 +93,8 @@ const Subscriptions = () => {
     <Box sx={{ m: 4 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>
-          <Paper sx={{ height: 520 }}>
+          <Paper sx={{ height: 520, position: "relative" }}>
+            <CustomPopover />
             <PieChart data={topicOccurencesForChart} />
           </Paper>
         </Grid>
