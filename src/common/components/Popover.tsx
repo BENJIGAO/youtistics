@@ -58,9 +58,9 @@ const CustomPopover = () => {
             here
           </Link>
           ). They categorize the type of content that the channel produces. Each
-          topic is categorized under more general topics (e.g., Gaming, Sports,
-          etc.,). This pie chart shows the distribution of these general topics
-          based on your most recent subscriptions.
+          topic falls under more general topics (e.g., Gaming, Sports, etc.,).
+          This pie chart shows the distribution of these general topics based on
+          your most recent subscriptions.
         </Typography>
       </Popover>
     </div>
