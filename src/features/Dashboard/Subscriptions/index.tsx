@@ -14,11 +14,12 @@ import GaugeChart from "features/Dashboard/Subscriptions/components/charts/Gauge
 import TopicInfoCard from "features/Dashboard/Subscriptions/components/TopicInfoCard";
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
 import { convertToPieChartData, convertToTopicData } from "./utils";
-import { IGroupedTopicOccurences } from "./types";
+import { IGroupedOccurences } from "./types";
+import TopicAccordion from "features/Dashboard/Subscriptions/components/TopicAccordion";
 
 const Subscriptions = () => {
-  const [groupedTopicOccurences, setGroupedTopicOccurences] =
-    useState<IGroupedTopicOccurences>({});
+  const [groupedOccurences, setGroupedOccurences] =
+    useState<IGroupedOccurences>({});
 
   // Gets users subscriptions on load
   useEffect(() => {
@@ -40,18 +41,18 @@ const Subscriptions = () => {
 
     getChannelByIds(subscriptionIds).then((channels) => {
       const occurences = getGroupedTopicOccurrences(channels);
-      setGroupedTopicOccurences(occurences);
+      setGroupedOccurences(occurences);
     });
   };
 
   // Converts channels to group topic occurences state
   const getGroupedTopicOccurrences = (
     channels: Channel[] | undefined
-  ): IGroupedTopicOccurences => {
+  ): IGroupedOccurences => {
     if (channels === undefined) {
       return {};
     }
-    const occurences: IGroupedTopicOccurences = {
+    const occurences: IGroupedOccurences = {
       Music: {},
       Gaming: {},
       Sports: {},
@@ -89,7 +90,7 @@ const Subscriptions = () => {
         <Grid item xs={12} lg={6}>
           <Paper sx={{ height: 520, position: "relative", p: 3 }}>
             <CustomPopover />
-            <PieChart data={convertToPieChartData(groupedTopicOccurences)} />
+            <PieChart data={convertToPieChartData(groupedOccurences)} />
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6}>
@@ -98,16 +99,16 @@ const Subscriptions = () => {
               <TopicInfoCard
                 header="Most popular category"
                 type="most"
-                topicInfo={convertToTopicData(groupedTopicOccurences, "most")}
+                topicInfo={convertToTopicData(groupedOccurences, "most")}
               />
               <TopicInfoCard
                 header="Least popular category"
                 type="least"
-                topicInfo={convertToTopicData(groupedTopicOccurences, "least")}
+                topicInfo={convertToTopicData(groupedOccurences, "least")}
               />
             </Stack>
             <Paper sx={{ height: 302 }}>
-              <ScatterChart />
+              <TopicAccordion groupedOccurences={groupedOccurences} />
             </Paper>
           </Stack>
         </Grid>

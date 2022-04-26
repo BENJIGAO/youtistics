@@ -12,7 +12,7 @@ interface ITopicInfoCardProps {
 
 const TopicInfoCard = ({ header, type, topicInfo }: ITopicInfoCardProps) => {
   return (
-    <Paper sx={{ width: "50%", p: 3 }}>
+    <Paper sx={{ width: "calc(50% - 8px)", p: 3 }}>
       <OverlayScrollbar>
         <Typography variant="h6">{header}</Typography>
         <Typography

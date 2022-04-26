@@ -1,6 +1,6 @@
 import { isEmpty } from "common/utils/generalUtils";
 import { groupedIdMap } from "./topicIdMap";
-import { IGroupedTopicOccurences, ITopicInfo } from "./types";
+import { IGroupedOccurences, ITopicInfo } from "./types";
 
 interface IPieChartData {
   name: string;
@@ -8,7 +8,7 @@ interface IPieChartData {
 }
 
 export const convertToPieChartData = (
-  occurences: IGroupedTopicOccurences
+  occurences: IGroupedOccurences
 ): IPieChartData[] => {
   const convertedData: IPieChartData[] = [];
   for (const [groupTopicName, topicOccurences] of Object.entries(occurences)) {
@@ -25,7 +25,7 @@ export const convertToPieChartData = (
 };
 
 export const convertToTopicData = (
-  occurences: IGroupedTopicOccurences,
+  occurences: IGroupedOccurences,
   type: "most" | "least"
 ): ITopicInfo => {
   const topicInfo: ITopicInfo = {

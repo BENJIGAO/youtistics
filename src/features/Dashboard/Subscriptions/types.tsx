@@ -10,7 +10,7 @@ export interface ITopicOccurences {
   [key: string]: number;
 }
 
-export interface IGroupedTopicOccurences {
+export interface IGroupedOccurences {
   // key = General category name (e.g., Gaming)
   // value = Object containing topic occurences that fall under the general category
   [key: string]: ITopicOccurences;
