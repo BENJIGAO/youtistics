@@ -9,7 +9,6 @@ import CardWrapper from "./CardWrapper";
 const RecentSubscriptions = () => {
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
   const [channelStats, setChannelStats] = useState<ChannelStatistics[]>([]);
-  console.log(channelStats);
 
   // Gets users subscriptions on load
   useEffect(() => {
@@ -41,7 +40,6 @@ const RecentSubscriptions = () => {
 
     getChannelByIds(subscriptionIds).then((channels) => {
       if (channels !== undefined) {
-        console.log(channels);
         const sortedStatistics = sortChannelStats(channels);
         setChannelStats(sortedStatistics);
       }

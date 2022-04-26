@@ -2,22 +2,15 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
+import { ITopicInfo } from "features/Dashboard/Subscriptions/types";
 
 interface ITopicInfoCardProps {
   header: string;
-  topicName: string;
-  percentage: string;
-  subTopicName: string;
   type: "most" | "least";
+  topicInfo: ITopicInfo;
 }
 
-const TopicInfoCard = ({
-  header,
-  topicName,
-  percentage,
-  subTopicName,
-  type,
-}: ITopicInfoCardProps) => {
+const TopicInfoCard = ({ header, type, topicInfo }: ITopicInfoCardProps) => {
   return (
     <Paper sx={{ width: "50%", p: 3 }}>
       <OverlayScrollbar>
@@ -26,12 +19,13 @@ const TopicInfoCard = ({
           variant="h3"
           color={type === "most" ? "primary" : "secondary"}
         >
-          {percentage}
+          {topicInfo.percentage}
         </Typography>
         <Typography variant="body1" sx={{ mt: 1 }}>
-          {topicName}. Within {topicName.toLowerCase()},{" "}
+          {topicInfo.categoryName}. Within{" "}
+          {topicInfo.categoryName.toLowerCase()},{" "}
           <Box component="span" fontWeight="bold">
-            {subTopicName}
+            {topicInfo.topicName}
           </Box>{" "}
           is the {type === "most" ? "most" : "least"} occuring topic
         </Typography>

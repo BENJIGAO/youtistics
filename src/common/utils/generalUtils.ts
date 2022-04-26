@@ -21,3 +21,7 @@ export const nFormatter = (
     ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol
     : "0";
 };
+
+export const isEmpty = (obj: Object): boolean => {
+  return Object.keys(obj).length === 0;
+};

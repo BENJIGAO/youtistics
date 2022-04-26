@@ -13,22 +13,8 @@ import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChar
 import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
 import TopicInfoCard from "features/Dashboard/Subscriptions/components/TopicInfoCard";
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
-
-interface ITopicOccurences {
-  // key = Topic id
-  // value = Occurence of topic
-  [key: string]: number;
-}
-interface IGroupedTopicOccurences {
-  // key = General category name (e.g., Gaming)
-  // value = Object containing topic occurences that fall under the general category
-  [key: string]: ITopicOccurences;
-}
-
-interface IPieChartData {
-  name: string;
-  value: number;
-}
+import { convertToPieChartData, convertToTopicData } from "./utils";
+import { IGroupedTopicOccurences } from "./types";
 
 const Subscriptions = () => {
   const [groupedTopicOccurences, setGroupedTopicOccurences] =
@@ -38,13 +24,13 @@ const Subscriptions = () => {
   useEffect(() => {
     let abortController = new AbortController();
     getSubscriptions(100).then((subscriptions) => {
-      getAndProcessChannels(subscriptions);
+      getChannels(subscriptions);
     });
     return () => abortController.abort();
   }, []);
 
   // Makes channels.list call with ids from subscriptions and processes the result
-  const getAndProcessChannels = (subs: Subscription[] | undefined): void => {
+  const getChannels = (subs: Subscription[] | undefined): void => {
     if (subs === undefined) {
       return;
     }
@@ -97,26 +83,6 @@ const Subscriptions = () => {
     return occurences;
   };
 
-  // Converts group topics occurences state to pie chart data
-  const convertToPieChartData = (
-    occurences: IGroupedTopicOccurences
-  ): IPieChartData[] => {
-    const convertedData: IPieChartData[] = [];
-    for (const [groupTopicName, topicOccurences] of Object.entries(
-      occurences
-    )) {
-      convertedData.push({
-        name: groupTopicName,
-        value: Object.values(topicOccurences).reduce(
-          (total, count) => total + count,
-          0
-        ),
-      });
-    }
-
-    return convertedData;
-  };
-
   return (
     <Box sx={{ m: 4 }}>
       <Grid container spacing={2}>
@@ -131,17 +97,13 @@ const Subscriptions = () => {
             <Stack direction="row" spacing={2} sx={{ height: 202 }}>
               <TopicInfoCard
                 header="Most popular category"
-                topicName="Gaming"
-                percentage="60%"
-                subTopicName="Action Games"
                 type="most"
+                topicInfo={convertToTopicData(groupedTopicOccurences, "most")}
               />
               <TopicInfoCard
                 header="Least popular category"
-                topicName="Society"
-                percentage="3%"
-                subTopicName="Business"
                 type="least"
+                topicInfo={convertToTopicData(groupedTopicOccurences, "least")}
               />
             </Stack>
             <Paper sx={{ height: 302 }}>
