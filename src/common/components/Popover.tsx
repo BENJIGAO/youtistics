@@ -28,8 +28,8 @@ const CustomPopover = () => {
         onClick={handleClick}
         sx={{
           position: "absolute",
-          left: 0,
-          top: 0,
+          left: 6,
+          top: 6,
           zIndex: 1,
           fontSize: 22,
         }}

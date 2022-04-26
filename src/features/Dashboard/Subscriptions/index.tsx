@@ -11,6 +11,7 @@ import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
 import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
+import TopicInfoCard from "features/Dashboard/Subscriptions/components/TopicInfoCard";
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
 
 interface ITopicOccurences {
@@ -120,7 +121,7 @@ const Subscriptions = () => {
     <Box sx={{ m: 4 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>
-          <Paper sx={{ height: 520, position: "relative" }}>
+          <Paper sx={{ height: 520, position: "relative", p: 3 }}>
             <CustomPopover />
             <PieChart data={convertToPieChartData(groupedTopicOccurences)} />
           </Paper>
@@ -128,16 +129,20 @@ const Subscriptions = () => {
         <Grid item xs={12} lg={6}>
           <Stack spacing={2}>
             <Stack direction="row" spacing={2} sx={{ height: 202 }}>
-              <Paper sx={{ width: "50%" }}>
-                <Typography variant="h6">
-                  Sports were your favourite category
-                </Typography>
-              </Paper>
-              <Paper sx={{ width: "50%" }}>
-                <Typography variant="h6">
-                  Cooking was your least favourite category
-                </Typography>
-              </Paper>
+              <TopicInfoCard
+                header="Most popular category"
+                topicName="Gaming"
+                percentage="60%"
+                subTopicName="Action Games"
+                type="most"
+              />
+              <TopicInfoCard
+                header="Least popular category"
+                topicName="Society"
+                percentage="3%"
+                subTopicName="Business"
+                type="least"
+              />
             </Stack>
             <Paper sx={{ height: 302 }}>
               <ScatterChart />
