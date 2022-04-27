@@ -17,6 +17,7 @@ import { nFormatter } from "common/utils/generalUtils";
 
 const CustomCard = styled(Card)(() => ({
   height: 320,
+  marginBottom: 2,
 }));
 
 interface IStatistic {
