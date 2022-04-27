@@ -10,9 +10,10 @@ import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import { getTotalFromObjValues } from "common/utils/generalUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
-import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
 import TopicInfoCard from "features/Dashboard/Subscriptions/components/CategoryInfoCard";
 import TopicAccordion from "features/Dashboard/Subscriptions/components/CategoryAccordion";
+import MadeForKidsCard from "features/Dashboard/Subscriptions/components/MadeForKidsCard";
+import StatisticAveragesCard from "features/Dashboard/Subscriptions/components/StatisticAveragesCard";
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
 import { IGroupedOccurences, ITopicOccurences } from "./types";
 import { convertToPieChartData, convertToTopicData } from "./utils";
@@ -20,6 +21,9 @@ import { convertToPieChartData, convertToTopicData } from "./utils";
 const Subscriptions = () => {
   const [groupedOccurences, setGroupedOccurences] =
     useState<IGroupedOccurences>({});
+  const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
+    0, 0,
+  ]);
 
   // Gets users subscriptions on load
   useEffect(() => {
@@ -40,8 +44,7 @@ const Subscriptions = () => {
       .filter((id): id is string => id !== undefined);
 
     getChannelByIds(subscriptionIds).then((channels) => {
-      const occurences = getGroupedTopicOccurrences(channels);
-      setGroupedOccurences(occurences);
+      processChannels(channels);
     });
   };
 
@@ -52,13 +55,25 @@ const Subscriptions = () => {
     );
   };
 
-  // Converts channels to group topic occurences state
-  const getGroupedTopicOccurrences = (
-    channels: Channel[] | undefined
-  ): IGroupedOccurences => {
+  /**
+   * This function processes the channels array returned from the API response
+   * to set the state of data that we are interested in. In our case, we want
+   * the following information for each channel: whether it's made for kids, the
+   * topic ids, the view/subscriber/video numbers, and the subscriber-view
+   * relationship
+   *
+   * The extracting of info will happen in the order specified above. To be more specific:
+   * SECTION 1: Made for kids
+   * SECTION 2: Topic Ids
+   * SECTION 3: View/subscriber/video calculations
+   * SECTION 4: Subscriber-View Relationship
+   */
+  const processChannels = (channels: Channel[] | undefined): void => {
     if (channels === undefined) {
-      return {};
+      return;
     }
+    let madeForKidsCount = 0;
+
     const occurences: IGroupedOccurences = {
       Music: createInitialTopicObject(groupedIdMap["Music"]),
       Gaming: createInitialTopicObject(groupedIdMap["Gaming"]),
@@ -70,6 +85,9 @@ const Subscriptions = () => {
     };
 
     channels.forEach((channel) => {
+      if (channel.status?.madeForKids) {
+        madeForKidsCount++;
+      }
       const topicIds = channel.topicDetails?.topicIds ?? [];
       topicIds.forEach((topicId) => {
         // Loops through each of the categories to find a match
@@ -85,6 +103,8 @@ const Subscriptions = () => {
         }
       });
     });
+
+    setMadeForKidsRatio([madeForKidsCount, channels.length]);
 
     const sortedCategories = Object.fromEntries(
       Object.entries(occurences).sort(([, a], [, b]) => {
@@ -103,7 +123,7 @@ const Subscriptions = () => {
       })
     );
 
-    return sortedCategoriesAndTopics;
+    setGroupedOccurences(sortedCategoriesAndTopics);
   };
 
   return (
@@ -135,14 +155,10 @@ const Subscriptions = () => {
           </Stack>
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
-          <Paper sx={{ height: 252 }}>
-            <GaugeChart />
-          </Paper>
+          <MadeForKidsCard madeForKidsRatio={madeForKidsRatio} />
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
-          <Paper sx={{ height: 252 }}>
-            <GaugeChart />
-          </Paper>
+          <StatisticAveragesCard />
         </Grid>
         <Grid item xs={12} lg={6} xl={6}>
           <Paper sx={{ height: 252 }}>
