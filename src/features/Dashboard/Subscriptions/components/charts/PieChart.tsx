@@ -52,6 +52,22 @@ const PieChart = ({ data }: IPieChartProps) => {
         fontSize: 14,
       },
     },
+    /**
+     * Color scheme uses a warm/cold color combination and
+     * a palette generator to pick distinguishable colors between
+     * the two primary colors (one warm, one cold).
+     * Ref: https://dashboards.mysidewalk.com/style-guide-for-dashboards/pie-charts
+     * Ref: https://learnui.design/tools/data-color-picker.html#palette
+     */
+    color: [
+      "#1565c0",
+      "#815fc4",
+      "#c153b5",
+      "#f04a96",
+      "#ff546f",
+      "#ff7243",
+      "#ff9800",
+    ],
     series: [
       {
         name: "Access From",
