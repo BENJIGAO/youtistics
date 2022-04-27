@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
 import { IGroupedOccurences } from "features/Dashboard/Subscriptions/types";
-import TopicAccordionTable from "./TopicAccordionTable";
+import TopicAccordionTable from "./CategoryAccordionTable";
 
 interface ITopicAccordionProps {
   groupedOccurences: IGroupedOccurences;
