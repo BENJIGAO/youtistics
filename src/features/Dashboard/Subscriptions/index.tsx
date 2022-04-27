@@ -5,7 +5,6 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { Subscription, Channel } from "@types";
-import Copyright from "common/components/Copyright";
 import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
@@ -85,17 +84,17 @@ const Subscriptions = () => {
   };
 
   return (
-    <Box sx={{ m: 4 }}>
+    <Box sx={{ m: 3 }}>
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>
-          <Paper sx={{ height: 520, position: "relative", p: 3 }}>
+          <Paper sx={{ height: 544, position: "relative", p: 3 }}>
             <CustomPopover />
             <PieChart data={convertToPieChartData(groupedOccurences)} />
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6}>
           <Stack spacing={2}>
-            <Stack direction="row" spacing={2} sx={{ height: 202 }}>
+            <Stack direction="row" spacing={2} sx={{ height: 192 }}>
               <TopicInfoCard
                 header="Most popular category"
                 type="most"
@@ -107,7 +106,7 @@ const Subscriptions = () => {
                 topicInfo={convertToTopicData(groupedOccurences, "least")}
               />
             </Stack>
-            <Paper sx={{ height: 302 }}>
+            <Paper sx={{ height: 336 }}>
               <TopicAccordion groupedOccurences={groupedOccurences} />
             </Paper>
           </Stack>
@@ -133,9 +132,6 @@ const Subscriptions = () => {
               RDCWorld1 is your favourite channel!
             </Typography>
           </Paper>
-        </Grid>
-        <Grid item xs={12} sx={{ mt: 5 }}>
-          <Copyright />
         </Grid>
       </Grid>
     </Box>

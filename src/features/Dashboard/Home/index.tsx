@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import Copyright from "common/components/Copyright";
 import RecentSubscriptions from "features/Dashboard/Home/components/RecentSubscriptions";
 import RecentLikedVideos from "features/Dashboard/Home/components/RecentLikedVideos";
 
@@ -11,7 +10,7 @@ import "swiper/css/virtual";
 
 const Home = () => {
   return (
-    <Box sx={{ m: 4 }}>
+    <Box sx={{ m: 3 }}>
       <Grid container rowSpacing={3}>
         <Grid item xs={12}>
           <Typography component="h2" variant="h4">
@@ -26,7 +25,6 @@ const Home = () => {
         </Grid>
         <RecentLikedVideos />
       </Grid>
-      <Copyright sx={{ pt: 4 }} />
     </Box>
   );
 };
