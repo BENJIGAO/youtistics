@@ -1,4 +1,4 @@
-import { isEmpty } from "common/utils/generalUtils";
+import { isObjEmpty } from "common/utils/generalUtils";
 import { groupedIdMap } from "./topicIdMap";
 import { IGroupedOccurences, ITopicInfo } from "./types";
 
@@ -12,13 +12,15 @@ export const convertToPieChartData = (
 ): IPieChartData[] => {
   const convertedData: IPieChartData[] = [];
   for (const [groupTopicName, topicOccurences] of Object.entries(occurences)) {
-    convertedData.push({
-      name: groupTopicName,
-      value: Object.values(topicOccurences).reduce(
-        (total, count) => total + count,
-        0
-      ),
-    });
+    if (!isObjEmpty(topicOccurences)) {
+      convertedData.push({
+        name: groupTopicName,
+        value: Object.values(topicOccurences).reduce(
+          (total, count) => total + count,
+          0
+        ),
+      });
+    }
   }
 
   return convertedData;
@@ -34,14 +36,14 @@ export const convertToTopicData = (
     topicName: "",
   };
   // If occurences is an empty object
-  if (isEmpty(occurences)) {
+  if (isObjEmpty(occurences)) {
     return topicInfo;
   }
 
   // If we are looking for the least popular category and there are categories missing
   if (type === "least") {
     const missingCategory = Object.keys(occurences).find((categoryName) =>
-      isEmpty(occurences[categoryName])
+      isObjEmpty(occurences[categoryName])
     );
 
     if (missingCategory !== undefined) {

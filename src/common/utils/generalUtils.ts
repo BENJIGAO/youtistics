@@ -22,6 +22,6 @@ export const nFormatter = (
     : "0";
 };
 
-export const isEmpty = (obj: Object): boolean => {
+export const isObjEmpty = (obj: Object): boolean => {
   return Object.keys(obj).length === 0;
 };

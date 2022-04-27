@@ -10,7 +10,7 @@ interface IParams {
 
 /**
  * The format of the cache key will be the following:
- * <resource_type>.<method>?<dynamic_param_1>=<dynamic_param_1_value>...<dynamic_param_1>=<dynamic_param_1_value>
+ * <resource_type>.<method>?<dynamic_param_1>=<dynamic_param_1_value>...<dynamic_param_x>=<dynamic_param_x_value>
  * where the params are in the same order for each method of a specific resource type.
  *
  * Here's an example key using the Youtube Data API's channels.list method with a dynamic params of ids:
