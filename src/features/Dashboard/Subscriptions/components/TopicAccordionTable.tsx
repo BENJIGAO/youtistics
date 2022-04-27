@@ -40,11 +40,9 @@ const TopicAccordionTable = ({
               <TableCell component="th" scope="row">
                 {topicName}
               </TableCell>
-              <TableCell align="right">{topicCounts[topicName] ?? 0}</TableCell>
+              <TableCell align="right">{topicCounts[topicName]}</TableCell>
               <TableCell align="right">
-                {topicCounts[topicName]
-                  ? ((topicCounts[topicName] * 100) / totalCount).toFixed(1)
-                  : 0}
+                {((topicCounts[topicName] * 100) / totalCount).toFixed(1)}
               </TableCell>
             </TableRow>
           ))}

@@ -84,7 +84,11 @@ export const convertToTopicData = (
   const percentage = `${((categoryCount * 100) / totalCount).toFixed()}%`;
 
   const topicName = Object.keys(occurences[categoryName]).reduce((a, b) => {
-    return occurences[categoryName][a] > occurences[categoryName][b] ? a : b;
+    if (type === "most") {
+      return occurences[categoryName][a] > occurences[categoryName][b] ? a : b;
+    } else {
+      return occurences[categoryName][a] > occurences[categoryName][b] ? b : a;
+    }
   });
 
   return {

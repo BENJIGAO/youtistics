@@ -14,7 +14,7 @@ import GaugeChart from "features/Dashboard/Subscriptions/components/charts/Gauge
 import TopicInfoCard from "features/Dashboard/Subscriptions/components/TopicInfoCard";
 import TopicAccordion from "features/Dashboard/Subscriptions/components/TopicAccordion";
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
-import { IGroupedOccurences } from "./types";
+import { IGroupedOccurences, ITopicOccurences } from "./types";
 import { convertToPieChartData, convertToTopicData } from "./utils";
 
 const Subscriptions = () => {
@@ -45,6 +45,13 @@ const Subscriptions = () => {
     });
   };
 
+  // Create initial Topic Object with keys as topic names and values starting at 0
+  const createInitialTopicObject = (topicIdMap: Object): ITopicOccurences => {
+    return Object.fromEntries(
+      Object.values(topicIdMap).map((topicName) => [topicName, 0])
+    );
+  };
+
   // Converts channels to group topic occurences state
   const getGroupedTopicOccurrences = (
     channels: Channel[] | undefined
@@ -53,28 +60,26 @@ const Subscriptions = () => {
       return {};
     }
     const occurences: IGroupedOccurences = {
-      Music: {},
-      Gaming: {},
-      Sports: {},
-      Entertainment: {},
-      Lifestyle: {},
-      Society: {},
-      Other: {},
+      Music: createInitialTopicObject(groupedIdMap["Music"]),
+      Gaming: createInitialTopicObject(groupedIdMap["Gaming"]),
+      Sports: createInitialTopicObject(groupedIdMap["Sports"]),
+      Entertainment: createInitialTopicObject(groupedIdMap["Entertainment"]),
+      Lifestyle: createInitialTopicObject(groupedIdMap["Lifestyle"]),
+      Society: createInitialTopicObject(groupedIdMap["Society"]),
+      Other: createInitialTopicObject(groupedIdMap["Other"]),
     };
 
     channels.forEach((channel) => {
       const topicIds = channel.topicDetails?.topicIds ?? [];
       topicIds.forEach((topicId) => {
-        // Loops through each of the general categories to see if there's a match
+        // Loops through each of the categories to find a match
         for (const [groupName, idMap] of Object.entries(groupedIdMap)) {
           if (
+            topicIdMap[topicId] !== undefined &&
             idMap[topicId] !== undefined &&
-            topicIdMap[topicId] !== undefined
-          ) {
-            // Increment the topic within a general topic by one
             occurences[groupName][topicIdMap[topicId]] !== undefined
-              ? occurences[groupName][topicIdMap[topicId]]++
-              : (occurences[groupName][topicIdMap[topicId]] = 1);
+          ) {
+            occurences[groupName][topicIdMap[topicId]]++;
             break;
           }
         }
