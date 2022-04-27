@@ -11,10 +11,10 @@ import ScatterChart from "features/Dashboard/Subscriptions/components/charts/Sca
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
 import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
 import TopicInfoCard from "features/Dashboard/Subscriptions/components/TopicInfoCard";
-import { groupedIdMap, topicIdMap } from "./topicIdMap";
-import { convertToPieChartData, convertToTopicData } from "./utils";
-import { IGroupedOccurences } from "./types";
 import TopicAccordion from "features/Dashboard/Subscriptions/components/TopicAccordion";
+import { groupedIdMap, topicIdMap } from "./topicIdMap";
+import { IGroupedOccurences } from "./types";
+import { convertToPieChartData, convertToTopicData } from "./utils";
 
 const Subscriptions = () => {
   const [groupedOccurences, setGroupedOccurences] =

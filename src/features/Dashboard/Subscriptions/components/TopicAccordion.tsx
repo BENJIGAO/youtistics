@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -6,19 +7,27 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
 import { IGroupedOccurences } from "features/Dashboard/Subscriptions/types";
 import TopicAccordionTable from "./TopicAccordionTable";
-import { Box } from "@mui/system";
 
 interface ITopicAccordionProps {
   groupedOccurences: IGroupedOccurences;
 }
 
 const TopicAccordion = ({ groupedOccurences }: ITopicAccordionProps) => {
-  console.log(groupedOccurences);
+  // gets total count of categories and memoizes it
+  const memoizedTotal = useMemo(() => {
+    return Object.values(groupedOccurences).reduce((totalCount, category) => {
+      return (
+        totalCount +
+        Object.values(category).reduce((total, count) => total + count, 0)
+      );
+    }, 0);
+  }, [groupedOccurences]);
+
   return (
     <OverlayScrollbar>
       {Object.keys(groupedOccurences).map((categoryName) => {
         return (
-          <Accordion disableGutters>
+          <Accordion key={categoryName}>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
@@ -27,7 +36,11 @@ const TopicAccordion = ({ groupedOccurences }: ITopicAccordionProps) => {
               <Typography>{categoryName}</Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <TopicAccordionTable />
+              <TopicAccordionTable
+                categoryName={categoryName}
+                topicCounts={groupedOccurences[categoryName]}
+                totalCount={memoizedTotal}
+              />
             </AccordionDetails>
           </Accordion>
         );
