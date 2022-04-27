@@ -49,7 +49,8 @@ const CustomPopover = () => {
         sx={{ width: 500 }}
       >
         <Typography sx={{ p: 2 }} variant="body2">
-          Every channel have topic(s) associated with it (the list can be seen{" "}
+          For every channel that exists, Youtube associates certain topics with
+          it (the list can be seen{" "}
           <Link
             href="https://gist.github.com/stpe/2951130dfc8f1d0d1a2ad736bef3b703?permalink_comment_id=4128880#gistcomment-4128880"
             target="_blank"
@@ -57,10 +58,10 @@ const CustomPopover = () => {
           >
             here
           </Link>
-          ). They categorize the type of content that the channel produces. Each
-          topic falls under more general topics (e.g., Gaming, Sports, etc.,).
-          This pie chart shows the distribution of these general topics based on
-          your most recent subscriptions.
+          ). They categorize the type of content that the channel produces.
+          Moreover, each topic falls under more general categories (e.g.,
+          Gaming, Sports, etc.,). This pie chart shows the distribution of these
+          categories based on your most recent subscriptions.
         </Typography>
       </Popover>
     </div>
