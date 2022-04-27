@@ -1,3 +1,4 @@
+// Formats numbers based on thresholds (e.g., M (million), K (thousand))
 export const nFormatter = (
   numString: string | undefined,
   digits: number
@@ -22,6 +23,12 @@ export const nFormatter = (
     : "0";
 };
 
+// Checks if object is empty
 export const isObjEmpty = (obj: Object): boolean => {
   return Object.keys(obj).length === 0;
+};
+
+// Gets total from values of object
+export const getTotalFromObjValues = (obj: Object): number => {
+  return Object.values(obj).reduce((total, count) => total + count, 0);
 };

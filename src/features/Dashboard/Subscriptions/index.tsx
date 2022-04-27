@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Subscription, Channel } from "@types";
 import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
+import { getTotalFromObjValues } from "common/utils/generalUtils";
 import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
 import GaugeChart from "features/Dashboard/Subscriptions/components/charts/GaugeChart";
@@ -80,7 +81,13 @@ const Subscriptions = () => {
       });
     });
 
-    return occurences;
+    const sortedOccurences = Object.fromEntries(
+      Object.entries(occurences).sort(([, a], [, b]) => {
+        return getTotalFromObjValues(b) - getTotalFromObjValues(a);
+      })
+    );
+
+    return sortedOccurences;
   };
 
   return (

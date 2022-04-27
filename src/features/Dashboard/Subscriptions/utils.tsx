@@ -1,4 +1,4 @@
-import { isObjEmpty } from "common/utils/generalUtils";
+import { getTotalFromObjValues, isObjEmpty } from "common/utils/generalUtils";
 import { groupedIdMap } from "./topicIdMap";
 import { IGroupedOccurences, ITopicInfo } from "./types";
 
@@ -15,10 +15,7 @@ export const convertToPieChartData = (
     if (!isObjEmpty(topicOccurences)) {
       convertedData.push({
         name: groupTopicName,
-        value: Object.values(topicOccurences).reduce(
-          (total, count) => total + count,
-          0
-        ),
+        value: getTotalFromObjValues(topicOccurences),
       });
     }
   }
@@ -62,15 +59,9 @@ export const convertToTopicData = (
 
   const categoryName = Object.keys(occurences).reduce((a, b) => {
     // count of previous category with highest count
-    const aCount = Object.values(occurences[a]).reduce(
-      (total, count) => total + count,
-      0
-    );
+    const aCount = getTotalFromObjValues(occurences[a]);
     // count of current category count
-    const bCount = Object.values(occurences[b]).reduce(
-      (total, count) => total + count,
-      0
-    );
+    const bCount = getTotalFromObjValues(occurences[b]);
 
     // Only add aCount if first iteration
     if (totalCount === 0) {
