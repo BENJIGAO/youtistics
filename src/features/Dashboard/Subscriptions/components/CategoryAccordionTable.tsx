@@ -1,3 +1,4 @@
+import _ from "lodash";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -37,7 +38,7 @@ const TopicAccordionTable = ({
               </TableCell>
               <TableCell align="right">{count}</TableCell>
               <TableCell align="right">
-                {((count * 100) / totalCount).toFixed(1)}
+                {_.round((count * 100) / totalCount, 1)}
               </TableCell>
             </TableRow>
           ))}

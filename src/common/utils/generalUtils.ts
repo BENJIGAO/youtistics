@@ -1,4 +1,4 @@
-// Formats numbers based on thresholds (e.g., M (million), K (thousand))
+// Formats numbers in a user friendly way and with thresholds (e.g., M (million), K (thousand))
 export const nFormatter = (
   numString: string | undefined,
   digits: number

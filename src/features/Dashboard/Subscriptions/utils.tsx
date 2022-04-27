@@ -10,7 +10,6 @@ interface IPieChartData {
 export const convertToPieChartData = (
   occurences: IGroupedOccurences
 ): IPieChartData[] => {
-  console.log(occurences);
   const convertedData: IPieChartData[] = [];
   for (const [groupTopicName, topicOccurences] of Object.entries(occurences)) {
     if (!isObjEmpty(topicOccurences)) {
