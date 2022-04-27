@@ -37,7 +37,6 @@ const TopicAccordion = ({ groupedOccurences }: ITopicAccordionProps) => {
             </AccordionSummary>
             <AccordionDetails>
               <TopicAccordionTable
-                categoryName={categoryName}
                 topicCounts={groupedOccurences[categoryName]}
                 totalCount={memoizedTotal}
               />

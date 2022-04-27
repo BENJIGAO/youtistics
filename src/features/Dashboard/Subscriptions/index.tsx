@@ -86,13 +86,24 @@ const Subscriptions = () => {
       });
     });
 
-    const sortedOccurences = Object.fromEntries(
+    const sortedCategories = Object.fromEntries(
       Object.entries(occurences).sort(([, a], [, b]) => {
         return getTotalFromObjValues(b) - getTotalFromObjValues(a);
       })
     );
 
-    return sortedOccurences;
+    const sortedCategoriesAndTopics = Object.fromEntries(
+      Object.entries(sortedCategories).map(([categoryName, topicCounts]) => {
+        return [
+          categoryName,
+          Object.fromEntries(
+            Object.entries(topicCounts).sort(([, a], [, b]) => b - a)
+          ),
+        ];
+      })
+    );
+
+    return sortedCategoriesAndTopics;
   };
 
   return (

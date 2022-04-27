@@ -5,17 +5,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { groupedIdMap } from "features/Dashboard/Subscriptions/topicIdMap";
 import { ITopicOccurences } from "features/Dashboard/Subscriptions/types";
 
 interface ITopicAccordionTableProps {
-  categoryName: string;
   totalCount: number;
   topicCounts: ITopicOccurences;
 }
 
 const TopicAccordionTable = ({
-  categoryName,
   totalCount,
   topicCounts,
 }: ITopicAccordionTableProps) => {
@@ -30,9 +27,7 @@ const TopicAccordionTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {Object.values(
-            groupedIdMap[categoryName as keyof typeof groupedIdMap]
-          ).map((topicName) => (
+          {Object.entries(topicCounts).map(([topicName, count]) => (
             <TableRow
               key={topicName}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -40,9 +35,9 @@ const TopicAccordionTable = ({
               <TableCell component="th" scope="row">
                 {topicName}
               </TableCell>
-              <TableCell align="right">{topicCounts[topicName]}</TableCell>
+              <TableCell align="right">{count}</TableCell>
               <TableCell align="right">
-                {((topicCounts[topicName] * 100) / totalCount).toFixed(1)}
+                {((count * 100) / totalCount).toFixed(1)}
               </TableCell>
             </TableRow>
           ))}
