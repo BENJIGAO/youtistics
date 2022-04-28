@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { Subscription, Channel } from "@types";
 import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
@@ -17,6 +16,7 @@ import StatisticAveragesCard from "features/Dashboard/Subscriptions/components/S
 import { groupedIdMap, topicIdMap } from "./topicIdMap";
 import { IGroupedOccurences, ITopicOccurences } from "./types";
 import { convertToPieChartData, convertToTopicData } from "./utils";
+import FavouriteChannelCard from "./components/FavouriteChannelCard";
 
 const Subscriptions = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -32,6 +32,7 @@ const Subscriptions = () => {
   >([]);
   const [groupedOccurences, setGroupedOccurences] =
     useState<IGroupedOccurences>({});
+  const [favouriteChannel, setFavouriteChannel] = useState<Channel>({});
 
   // Gets users subscriptions on load
   useEffect(() => {
@@ -53,7 +54,6 @@ const Subscriptions = () => {
 
     getChannelByIds(subscriptionIds).then((channels) => {
       processChannels(channels);
-      console.log(channels);
     });
   };
 
@@ -75,7 +75,8 @@ const Subscriptions = () => {
    * SECTION 1: Made for kids
    * SECTION 2: View/subscriber/video calculations
    * SECTION 3: Subscriber-View Relationship
-   * SECTION 4: Topic Ids
+   * SECTION 4: Favourite Channel
+   * SECTION 5: Topic Ids
    */
   const processChannels = (channels: Channel[] | undefined): void => {
     if (channels === undefined) {
@@ -94,6 +95,9 @@ const Subscriptions = () => {
     let subscriberViewPairs: [number, number, string][] = [];
 
     // SECTION 4
+    let favouriteChannel: Channel = {};
+
+    // SECTION 5
     const occurences: IGroupedOccurences = {
       Music: createInitialTopicObject(groupedIdMap["Music"]),
       Gaming: createInitialTopicObject(groupedIdMap["Gaming"]),
@@ -134,7 +138,9 @@ const Subscriptions = () => {
         ]);
       }
 
-      // SECTION 4
+      // SECTION 4: TODO: Figure out favourite channel logic
+
+      // SECTION 5
       const topicIds = channel.topicDetails?.topicIds ?? [];
       topicIds.forEach((topicId) => {
         // Loops through each of the categories to find a match
@@ -163,6 +169,9 @@ const Subscriptions = () => {
     setSubscriberViewPairs(subscriberViewPairs);
 
     // SECTION 4
+    setFavouriteChannel(channels[0]);
+
+    // SECTION 5
     const sortedCategories = Object.fromEntries(
       Object.entries(occurences).sort(([, a], [, b]) => {
         return getTotalFromObjValues(b) - getTotalFromObjValues(a);
@@ -227,11 +236,10 @@ const Subscriptions = () => {
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
-          <Paper sx={{ height: 252 }}>
-            <Typography variant="h6">
-              RDCWorld1 is your favourite channel!
-            </Typography>
-          </Paper>
+          <FavouriteChannelCard
+            channelName={favouriteChannel.snippet?.title}
+            channelThumbnail={favouriteChannel.snippet?.thumbnails?.high?.url}
+          />
         </Grid>
       </Grid>
     </Box>
