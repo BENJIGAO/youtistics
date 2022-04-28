@@ -26,6 +26,10 @@ const Subscriptions = () => {
   const [averageSubscriberCount, setAverageSubscriberCount] =
     useState<number>(0);
   const [averageVideoCount, setAverageVideoCount] = useState<number>(0);
+  // [subscriber count, view count, channel name]
+  const [subscriberViewPairs, setSubscriberViewPairs] = useState<
+    [number, number, string][]
+  >([]);
   const [groupedOccurences, setGroupedOccurences] =
     useState<IGroupedOccurences>({});
 
@@ -69,9 +73,9 @@ const Subscriptions = () => {
    *
    * The extracting of info will happen in the order specified above. To be more specific:
    * SECTION 1: Made for kids
-   * SECTION 3: View/subscriber/video calculations
-   * SECTION 4: Subscriber-View Relationship
-   * SECTION 2: Topic Ids
+   * SECTION 2: View/subscriber/video calculations
+   * SECTION 3: Subscriber-View Relationship
+   * SECTION 4: Topic Ids
    */
   const processChannels = (channels: Channel[] | undefined): void => {
     if (channels === undefined) {
@@ -87,6 +91,7 @@ const Subscriptions = () => {
     let totalVideos = 0;
 
     // SECTION 3
+    let subscriberViewPairs: [number, number, string][] = [];
 
     // SECTION 4
     const occurences: IGroupedOccurences = {
@@ -117,6 +122,17 @@ const Subscriptions = () => {
       }
 
       // SECTION 3
+      if (
+        channel.snippet?.title !== undefined &&
+        channel.statistics?.viewCount !== undefined &&
+        channel.statistics?.subscriberCount !== undefined
+      ) {
+        subscriberViewPairs.push([
+          Number(channel.statistics.viewCount),
+          Number(channel.statistics.subscriberCount),
+          channel.snippet.title,
+        ]);
+      }
 
       // SECTION 4
       const topicIds = channel.topicDetails?.topicIds ?? [];
@@ -144,6 +160,7 @@ const Subscriptions = () => {
     setAverageVideoCount(Math.round(totalVideos / channels.length));
 
     // SECTION 3
+    setSubscriberViewPairs(subscriberViewPairs);
 
     // SECTION 4
     const sortedCategories = Object.fromEntries(
@@ -205,8 +222,8 @@ const Subscriptions = () => {
           />
         </Grid>
         <Grid item xs={12} lg={6} xl={6}>
-          <Paper sx={{ height: 252 }}>
-            <ScatterChart />
+          <Paper sx={{ height: 252, pt: 3 }}>
+            <ScatterChart data={subscriberViewPairs} />
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
