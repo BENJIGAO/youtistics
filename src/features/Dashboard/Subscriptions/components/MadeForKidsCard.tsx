@@ -1,6 +1,5 @@
-import { Typography } from "@mui/material";
-import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
 
 interface IMadeForKidsCardProps {

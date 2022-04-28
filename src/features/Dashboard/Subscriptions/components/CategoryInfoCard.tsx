@@ -4,13 +4,17 @@ import { Box } from "@mui/system";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
 import { ITopicInfo } from "features/Dashboard/Subscriptions/types";
 
-interface ITopicInfoCardProps {
+interface ICategoryInfoCardProps {
   header: string;
   type: "most" | "least";
   topicInfo: ITopicInfo;
 }
 
-const TopicInfoCard = ({ header, type, topicInfo }: ITopicInfoCardProps) => {
+const CategoryInfoCard = ({
+  header,
+  type,
+  topicInfo,
+}: ICategoryInfoCardProps) => {
   return (
     <Paper sx={{ width: "calc(50% - 8px)", p: 3 }}>
       <OverlayScrollbar>
@@ -34,4 +38,4 @@ const TopicInfoCard = ({ header, type, topicInfo }: ITopicInfoCardProps) => {
   );
 };
 
-export default TopicInfoCard;
+export default CategoryInfoCard;
