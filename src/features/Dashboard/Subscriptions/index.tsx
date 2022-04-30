@@ -194,7 +194,10 @@ const Subscriptions = () => {
         <Grid item xs={12} lg={6}>
           <Paper sx={{ height: 544, position: "relative", p: 3 }}>
             <CustomPopover />
-            <PieChart data={convertToPieChartData(groupedOccurences)} />
+            <PieChart
+              title="Subscription Topic Distribution"
+              data={convertToPieChartData(groupedOccurences)}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6}>

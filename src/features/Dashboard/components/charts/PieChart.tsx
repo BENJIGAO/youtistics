@@ -13,13 +13,14 @@ interface ITopicOccurencesForChart {
 }
 
 interface IPieChartProps {
+  title: string;
   data: ITopicOccurencesForChart[];
 }
 
-const PieChart = ({ data }: IPieChartProps) => {
+const PieChart = ({ title, data }: IPieChartProps) => {
   const option: EChartsOption = {
     title: {
-      text: "Subscription Topic Distribution",
+      text: title,
       left: "center",
       textStyle: {
         fontFamily: "Roboto",

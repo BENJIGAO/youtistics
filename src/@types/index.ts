@@ -182,6 +182,8 @@ export interface Video {
   /** The statistics object contains statistics about the video. */
   /** The topicDetails object encapsulates information about Freebase topics associated with the video. */
   topicDetails?: VideoTopicDetails;
+  /** The status object contains information about the video's uploading, processing, and privacy statuses. */
+  status?: VideoStatus;
 }
 export interface VideoContentDetails {
   /** The value of captions indicates whether the video has captions or not. */
@@ -214,6 +216,29 @@ export interface VideoStatistics {
   likeCount?: string;
   /** The number of times the video has been viewed. */
   viewCount?: string;
+}
+interface VideoStatus {
+  /** This value indicates if the video can be embedded on another website. @mutable youtube.videos.insert youtube.videos.update */
+  embeddable?: boolean;
+  /** This value explains why a video failed to upload. This property is only present if the uploadStatus property indicates that the upload failed. */
+  failureReason?: string;
+  /** The video's license. @mutable youtube.videos.insert youtube.videos.update */
+  license?: string;
+  madeForKids?: boolean;
+  /** The video's privacy status. */
+  privacyStatus?: string;
+  /**
+   * This value indicates if the extended video statistics on the watch page can be viewed by everyone. Note that the view count, likes, etc will still be visible if this is disabled.
+   * @mutable youtube.videos.insert youtube.videos.update
+   */
+  publicStatsViewable?: boolean;
+  /** The date and time when the video is scheduled to publish. It can be set only if the privacy status of the video is private.. */
+  publishAt?: string;
+  /** This value explains why YouTube rejected an uploaded video. This property is only present if the uploadStatus property indicates that the upload was rejected. */
+  rejectionReason?: string;
+  selfDeclaredMadeForKids?: boolean;
+  /** The status of the uploaded video. */
+  uploadStatus?: string;
 }
 export interface VideoSnippet {
   /** The YouTube video category associated with the video. */

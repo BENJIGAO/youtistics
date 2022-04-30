@@ -73,7 +73,7 @@ export const getLikedVideos = async (maxResults: number) => {
   }
   try {
     const response = await window.gapi.client.youtube.videos.list({
-      part: "snippet,statistics",
+      part: "snippet,statistics,topicDetails,status",
       myRating: "like",
       maxResults: maxResults,
     });
