@@ -1,46 +1,44 @@
-# Getting Started with Create React App
+# Youtistics
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Youtistics is an app that provides insight into your Youtube viewing habits using Google's Youtube Data API. 
 
-## Available Scripts
+* **Unique:** Although there are many ways of tracking metrics as a Youtuber, never seen before is an app that provides statistics on a user's viewing habits.
+* **Visual:** Built upon [ECharts](https://echarts.apache.org/en/index.html), Youtistics provides a clean UI with charts to display data.
+* **Constantly evolving:** There is a plethora of opportunity on new features, so I make it my mission to make this app as complete as possible.
 
-In the project directory, you can run:
+_Note: At this point in the time the project is still in development_
 
-### `npm start`
+## Gif Demos
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Home
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+![Home Page](https://user-images.githubusercontent.com/82276831/166112757-75efbc75-a1e2-49da-a53c-c1c74a9f72d2.gif)
 
-### `npm test`
+### Your Subscriptions
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![Subscriptions Page](https://user-images.githubusercontent.com/82276831/166113012-6fd9dfc8-6db3-463f-b050-87ec0ef9e0b9.gif)
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Pictures
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Home
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![image](https://user-images.githubusercontent.com/82276831/166112326-e726e46a-83dc-4c6b-9e47-88516b35d5a0.png)
 
-### `npm run eject`
+### Your Subscriptions
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![image](https://user-images.githubusercontent.com/82276831/166113045-0f859999-9c03-4413-bfe7-b612803a7efe.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Channel/Video Card
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+![image](https://user-images.githubusercontent.com/82276831/166112388-6d2db05b-bd62-416c-82ac-c72908fc3508.png)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Category Table
 
-## Learn More
+![image](https://user-images.githubusercontent.com/82276831/166112418-8d6eb5fb-9eef-40ed-915e-e2a14347113a.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contact
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+If you have any questions or concerns, feel free to contact me at bhgao20014@gmail.com
+
+
