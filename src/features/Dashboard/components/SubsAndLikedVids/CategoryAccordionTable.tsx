@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { ITopicOccurences } from "features/Dashboard/Subscriptions/types";
+import { ITopicOccurences } from "@types";
 
 interface ITopicAccordionTableProps {
   totalCount: number;

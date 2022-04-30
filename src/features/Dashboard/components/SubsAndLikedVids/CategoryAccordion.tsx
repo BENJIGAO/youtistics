@@ -4,8 +4,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { IGroupedOccurences } from "@types";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
-import { IGroupedOccurences } from "features/Dashboard/Subscriptions/types";
 import TopicAccordionTable from "./CategoryAccordionTable";
 
 interface ITopicAccordionProps {

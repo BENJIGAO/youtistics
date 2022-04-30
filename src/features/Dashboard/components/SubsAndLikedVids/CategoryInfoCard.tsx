@@ -1,8 +1,8 @@
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/system";
+import { ITopicInfo } from "@types";
 import OverlayScrollbar from "common/components/OverlayScrollbar";
-import { ITopicInfo } from "features/Dashboard/Subscriptions/types";
 
 interface ICategoryInfoCardProps {
   header: string;

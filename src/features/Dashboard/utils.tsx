@@ -1,6 +1,6 @@
+import { IGroupedOccurences, ITopicInfo, ITopicOccurences } from "@types";
 import { getTotalFromObjValues, isObjEmpty } from "common/utils/generalUtils";
-import { groupedIdMap } from "./topicIdMap";
-import { IGroupedOccurences, ITopicInfo } from "./types";
+import { groupedIdMap } from "features/Dashboard/topicIdMap";
 
 interface IPieChartData {
   name: string;
@@ -96,4 +96,13 @@ export const convertToTopicData = (
     percentage: percentage,
     topicName: topicName,
   };
+};
+
+// Create initial topic Object with keys as topic names and values starting at 0
+export const createInitialTopicObject = (
+  topicIdMap: Object
+): ITopicOccurences => {
+  return Object.fromEntries(
+    Object.values(topicIdMap).map((topicName) => [topicName, 0])
+  );
 };

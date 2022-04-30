@@ -3,20 +3,23 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import { Subscription, Channel } from "@types";
+import { Subscription, Channel, IGroupedOccurences } from "@types";
 import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
 import { getTotalFromObjValues } from "common/utils/generalUtils";
-import ScatterChart from "features/Dashboard/Subscriptions/components/charts/ScatterChart";
-import PieChart from "features/Dashboard/Subscriptions/components/charts/PieChart";
-import CategoryInfoCard from "features/Dashboard/Subscriptions/components/CategoryInfoCard";
-import TopicAccordion from "features/Dashboard/Subscriptions/components/CategoryAccordion";
-import MadeForKidsCard from "features/Dashboard/Subscriptions/components/MadeForKidsCard";
-import StatisticAveragesCard from "features/Dashboard/Subscriptions/components/StatisticAveragesCard";
-import { groupedIdMap, topicIdMap } from "./topicIdMap";
-import { IGroupedOccurences, ITopicOccurences } from "./types";
-import { convertToPieChartData, convertToTopicData } from "./utils";
-import FavouriteChannelCard from "./components/FavouriteChannelCard";
+import { groupedIdMap, topicIdMap } from "features/Dashboard/topicIdMap";
+import {
+  convertToPieChartData,
+  convertToTopicData,
+  createInitialTopicObject,
+} from "features/Dashboard/utils";
+import ScatterChart from "features/Dashboard/components/charts/ScatterChart";
+import PieChart from "features/Dashboard/components/charts/PieChart";
+import CategoryInfoCard from "features/Dashboard/components/SubsAndLikedVids/CategoryInfoCard";
+import TopicAccordion from "features/Dashboard/components/SubsAndLikedVids/CategoryAccordion";
+import MadeForKidsCard from "features/Dashboard/components/SubsAndLikedVids/MadeForKidsCard";
+import StatisticAveragesCard from "features/Dashboard/components/SubsAndLikedVids/StatisticAveragesCard";
+import FavouriteChannelCard from "features/Dashboard/components/SubsAndLikedVids/FavouriteChannelCard";
 
 const Subscriptions = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -55,13 +58,6 @@ const Subscriptions = () => {
     getChannelByIds(subscriptionIds).then((channels) => {
       processChannels(channels);
     });
-  };
-
-  // Create initial Topic Object with keys as topic names and values starting at 0
-  const createInitialTopicObject = (topicIdMap: Object): ITopicOccurences => {
-    return Object.fromEntries(
-      Object.values(topicIdMap).map((topicName) => [topicName, 0])
-    );
   };
 
   /**
