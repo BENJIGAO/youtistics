@@ -11,10 +11,10 @@ export const convertToPieChartData = (
   occurences: IGroupedOccurences
 ): IPieChartData[] => {
   const convertedData: IPieChartData[] = [];
-  for (const [groupTopicName, topicOccurences] of Object.entries(occurences)) {
-    if (!isObjEmpty(topicOccurences)) {
+  for (const [categoryName, topicOccurences] of Object.entries(occurences)) {
+    if (getTotalFromObjValues(topicOccurences) > 0) {
       convertedData.push({
-        name: groupTopicName,
+        name: categoryName,
         value: getTotalFromObjValues(topicOccurences),
       });
     }

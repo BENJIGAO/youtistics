@@ -32,3 +32,7 @@ export const isObjEmpty = (obj: Object): boolean => {
 export const getTotalFromObjValues = (obj: Object): number => {
   return Object.values(obj).reduce((total, count) => total + count, 0);
 };
+
+export const createObjFromObjValues = (obj: Object): Object => {
+  return Object.fromEntries(Object.values(obj).map((value) => [value, true]));
+};

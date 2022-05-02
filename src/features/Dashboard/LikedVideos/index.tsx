@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import { IGroupedOccurences, Video } from "@types";
 import { getLikedVideos } from "common/utils/apiUtils";
-import { createInitialTopicObject } from "../utils";
+import { convertToPieChartData, createInitialTopicObject } from "../utils";
 import { groupedIdMap, topicIdMap } from "../topicIdMap";
-import { getTotalFromObjValues } from "common/utils/generalUtils";
+import {
+  createObjFromObjValues,
+  getTotalFromObjValues,
+} from "common/utils/generalUtils";
+import { Grid, Paper } from "@mui/material";
+import CustomPopover from "common/components/Popover";
+import PieChart from "features/Dashboard/components/charts/PieChart";
 
 const LikedVideos = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -33,7 +38,6 @@ const LikedVideos = () => {
       return;
     }
 
-    console.log(videos);
     // SECTION 1
     let madeForKidsCount = 0;
 
@@ -92,16 +96,19 @@ const LikedVideos = () => {
       // SECTION 4: TODO: Figure out favourite video logic
 
       // SECTION 5
-      const topicIds = video.topicDetails?.relevantTopicIds ?? [];
-      topicIds.forEach((topicId) => {
+      const wikiURLs = video.topicDetails?.topicCategories ?? [];
+      wikiURLs.forEach((wikiURL) => {
+        const topicName = parseWikiURL(wikiURL);
+        const topicNameMap = createObjFromObjValues(topicIdMap);
         // Loops through each of the categories to find a match
         for (const [groupName, idMap] of Object.entries(groupedIdMap)) {
+          const categoryTopicNameMap = createObjFromObjValues(idMap);
           if (
-            topicIdMap[topicId] !== undefined &&
-            idMap[topicId] !== undefined &&
-            occurences[groupName][topicIdMap[topicId]] !== undefined
+            topicNameMap[topicName as keyof Object] !== undefined &&
+            categoryTopicNameMap[topicName as keyof Object] !== undefined &&
+            occurences[groupName][topicName] !== undefined
           ) {
-            occurences[groupName][topicIdMap[topicId]]++;
+            occurences[groupName][topicName]++;
             break;
           }
         }
@@ -142,9 +149,26 @@ const LikedVideos = () => {
 
     setGroupedOccurences(sortedCategoriesAndTopics);
   };
+
+  // Parses the URL from video.topicDetails.topicCategories
+  const parseWikiURL = (url: string): string => {
+    // Gets the topic name and replaces underscores with a space
+    return url.split("/").slice(-1)[0].replaceAll("_", " ");
+  };
+
   return (
-    <Box>
-      <Typography>Liked Videos</Typography>
+    <Box sx={{ m: 3 }}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} lg={6}>
+          <Paper sx={{ height: 544, position: "relative", p: 3 }}>
+            <CustomPopover />
+            <PieChart
+              title="Video Topic Distribution"
+              data={convertToPieChartData(groupedOccurences)}
+            />
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 };
