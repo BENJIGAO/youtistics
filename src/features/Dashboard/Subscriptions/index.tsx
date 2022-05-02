@@ -20,6 +20,7 @@ import TopicAccordion from "features/Dashboard/components/SubsAndLikedVids/Categ
 import MadeForKidsCard from "features/Dashboard/components/SubsAndLikedVids/MadeForKidsCard";
 import StatisticAveragesCard from "features/Dashboard/components/SubsAndLikedVids/StatisticAveragesCard";
 import FavouriteChannelCard from "features/Dashboard/components/SubsAndLikedVids/FavouriteChannelCard";
+import { Typography, Link } from "@mui/material";
 
 const Subscriptions = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -193,7 +194,24 @@ const Subscriptions = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>
           <Paper sx={{ height: 544, position: "relative", p: 3 }}>
-            <CustomPopover />
+            <CustomPopover>
+              <Typography sx={{ p: 2 }} variant="body2">
+                For every channel that exists, Youtube associates certain topics
+                with it (the list can be seen{" "}
+                <Link
+                  href="https://gist.github.com/stpe/2951130dfc8f1d0d1a2ad736bef3b703?permalink_comment_id=4128880#gistcomment-4128880"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  here
+                </Link>
+                ). They categorize the type of content that the channel
+                produces. Moreover, each topic falls under more general
+                categories (e.g., Gaming, Sports, etc.,). This pie chart shows
+                the distribution of these categories based on your most recent
+                subscriptions.
+              </Typography>
+            </CustomPopover>
             <PieChart
               title="Subscription Topic Distribution"
               data={convertToPieChartData(groupedOccurences)}

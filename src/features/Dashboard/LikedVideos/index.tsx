@@ -8,7 +8,7 @@ import {
   createObjFromObjValues,
   getTotalFromObjValues,
 } from "common/utils/generalUtils";
-import { Grid, Paper } from "@mui/material";
+import { Grid, Link, Paper, Typography } from "@mui/material";
 import CustomPopover from "common/components/Popover";
 import PieChart from "features/Dashboard/components/charts/PieChart";
 
@@ -161,7 +161,23 @@ const LikedVideos = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} lg={6}>
           <Paper sx={{ height: 544, position: "relative", p: 3 }}>
-            <CustomPopover />
+            <CustomPopover>
+              <Typography sx={{ p: 2 }} variant="body2">
+                For every video that exists, Youtube categorizes and associates
+                certain topics with it (the list can be seen{" "}
+                <Link
+                  href="https://gist.github.com/stpe/2951130dfc8f1d0d1a2ad736bef3b703?permalink_comment_id=4128880#gistcomment-4128880"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  here
+                </Link>
+                ). Moreover, each topic falls under more general categories
+                (e.g., Gaming, Sports, etc.,). This pie chart shows the
+                distribution of these categories based on the videos you liked
+                most recently.
+              </Typography>
+            </CustomPopover>
             <PieChart
               title="Video Topic Distribution"
               data={convertToPieChartData(groupedOccurences)}
