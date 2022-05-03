@@ -10,21 +10,18 @@ import Typography from "@mui/material/Typography";
 import ImageNotFound from "assets/ImageNotFound.jpg";
 
 interface IMediaCardProps {
-  channelName: string | undefined;
-  channelThumbnail: string | undefined;
+  title: string | undefined;
+  imageURL: string | undefined;
 }
 
-const FavouriteChannelCard = ({
-  channelName,
-  channelThumbnail,
-}: IMediaCardProps) => {
+const FavouriteCard = ({ title, imageURL }: IMediaCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
-    <Card sx={{ height: 252 }}>
+    <Card sx={{ height: 252, position: "relative" }}>
       <CardMedia
         sx={{ maxHeight: 120 }}
         component="img"
-        image={channelThumbnail}
+        image={imageURL}
         alt="favourite channel"
         onError={(e: any) => (e.target.value = ImageNotFound)}
       />
@@ -35,10 +32,10 @@ const FavouriteChannelCard = ({
           fontWeight="bold"
           component="div"
         >
-          {channelName} is your favourite channel!
+          {title} is your favourite channel!
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ position: "absolute", bottom: 4, left: 4 }}>
         <Button onClick={() => setIsModalOpen(true)} size="small">
           Learn how we calculated this
         </Button>
@@ -92,4 +89,4 @@ const FavouriteChannelModal = ({
   );
 };
 
-export default FavouriteChannelCard;
+export default FavouriteCard;

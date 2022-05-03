@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import PersonIcon from "@mui/icons-material/Person";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { Subscription, Channel, IGroupedOccurences } from "@types";
 import CustomPopover from "common/components/Popover";
 import { getSubscriptions, getChannelByIds } from "common/utils/apiUtils";
-import { getTotalFromObjValues } from "common/utils/generalUtils";
+import { getTotalFromObjValues, nFormatter } from "common/utils/generalUtils";
 import { groupedIdMap, topicIdMap } from "features/Dashboard/topicIdMap";
 import {
   convertToPieChartData,
@@ -15,12 +20,11 @@ import {
 } from "features/Dashboard/utils";
 import ScatterChart from "features/Dashboard/components/charts/ScatterChart";
 import PieChart from "features/Dashboard/components/charts/PieChart";
+import CategoryAccordion from "features/Dashboard/components/SubsAndLikedVids/CategoryAccordion";
 import CategoryInfoCard from "features/Dashboard/components/SubsAndLikedVids/CategoryInfoCard";
-import TopicAccordion from "features/Dashboard/components/SubsAndLikedVids/CategoryAccordion";
 import MadeForKidsCard from "features/Dashboard/components/SubsAndLikedVids/MadeForKidsCard";
 import StatisticAveragesCard from "features/Dashboard/components/SubsAndLikedVids/StatisticAveragesCard";
-import FavouriteChannelCard from "features/Dashboard/components/SubsAndLikedVids/FavouriteChannelCard";
-import { Typography, Link } from "@mui/material";
+import FavouriteCard from "features/Dashboard/components/SubsAndLikedVids/FavouriteCard";
 
 const Subscriptions = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -129,8 +133,8 @@ const Subscriptions = () => {
         channel.statistics?.subscriberCount !== undefined
       ) {
         subscriberViewPairs.push([
-          Number(channel.statistics.viewCount),
           Number(channel.statistics.subscriberCount),
+          Number(channel.statistics.viewCount),
           channel.snippet.title,
         ]);
       }
@@ -233,7 +237,7 @@ const Subscriptions = () => {
               />
             </Stack>
             <Paper sx={{ height: 336 }}>
-              <TopicAccordion groupedOccurences={groupedOccurences} />
+              <CategoryAccordion groupedOccurences={groupedOccurences} />
             </Paper>
           </Stack>
         </Grid>
@@ -242,20 +246,34 @@ const Subscriptions = () => {
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
           <StatisticAveragesCard
-            averageViewCount={averageViewCount}
-            averageSubscriberCount={averageSubscriberCount}
-            averageVideoCount={averageVideoCount}
+            statistic1={
+              nFormatter(averageViewCount.toString(), 1) + " total views"
+            }
+            statistic2={
+              nFormatter(averageSubscriberCount.toString(), 1) + " subscribers"
+            }
+            statistic3={
+              nFormatter(averageVideoCount.toString(), 1) + " total views"
+            }
+            icon1={<VisibilityIcon fontSize="large" color="primary" />}
+            icon2={<PersonIcon fontSize="large" color="primary" />}
+            icon3={<VideocamIcon fontSize="large" color="primary" />}
           />
         </Grid>
         <Grid item xs={12} lg={6} xl={6}>
           <Paper sx={{ height: 252, pt: 3 }}>
-            <ScatterChart data={subscriberViewPairs} />
+            <ScatterChart
+              title="Subscribers vs Views"
+              xLabel="Subscribers"
+              yLabel="Views"
+              data={subscriberViewPairs}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} lg={6} xl={2}>
-          <FavouriteChannelCard
-            channelName={favouriteChannel.snippet?.title}
-            channelThumbnail={favouriteChannel.snippet?.thumbnails?.high?.url}
+          <FavouriteCard
+            title={favouriteChannel.snippet?.title}
+            imageURL={favouriteChannel.snippet?.thumbnails?.high?.url}
           />
         </Grid>
       </Grid>

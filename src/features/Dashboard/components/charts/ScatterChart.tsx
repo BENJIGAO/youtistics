@@ -10,13 +10,16 @@ interface ITooltipFormatterParams {
 }
 
 interface IScatterChartParams {
+  title: string;
+  xLabel: string;
+  yLabel: string;
   data: [number, number, string][];
 }
 
-const ScatterChart = ({ data }: IScatterChartParams) => {
+const ScatterChart = ({ title, xLabel, yLabel, data }: IScatterChartParams) => {
   const option: EChartsOption = {
     title: {
-      text: "Subscribers vs Views",
+      text: title,
       left: "center",
       textStyle: {
         fontFamily: "Roboto",
@@ -24,7 +27,7 @@ const ScatterChart = ({ data }: IScatterChartParams) => {
       },
     },
     xAxis: {
-      name: "Subscribers",
+      name: xLabel,
       nameLocation: "middle",
       nameTextStyle: {
         fontFamily: "Roboto",
@@ -39,7 +42,7 @@ const ScatterChart = ({ data }: IScatterChartParams) => {
       },
     },
     yAxis: {
-      name: "Views",
+      name: yLabel,
       nameLocation: "middle",
       nameTextStyle: {
         fontFamily: "Roboto",
@@ -61,10 +64,10 @@ const ScatterChart = ({ data }: IScatterChartParams) => {
 
         channelLabel.innerText = params.data[2].toString();
         channelLabel.style.fontWeight = "bold";
-        subscriberViewLabel.innerText = `Subscribers: ${nFormatter(
+        subscriberViewLabel.innerText = `${xLabel}: ${nFormatter(
           params.data[0].toString(),
           1
-        )}\nViews: ${nFormatter(params.data[1].toString(), 1)}`;
+        )}\n${yLabel}: ${nFormatter(params.data[1].toString(), 1)}`;
 
         return [channelLabel, subscriberViewLabel];
       },

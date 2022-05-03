@@ -1,16 +1,34 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import MessageIcon from "@mui/icons-material/Message";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 import { IGroupedOccurences, Video } from "@types";
+import CustomPopover from "common/components/Popover";
 import { getLikedVideos } from "common/utils/apiUtils";
-import { convertToPieChartData, createInitialTopicObject } from "../utils";
-import { groupedIdMap, topicIdMap } from "../topicIdMap";
 import {
   createObjFromObjValues,
   getTotalFromObjValues,
+  nFormatter,
 } from "common/utils/generalUtils";
-import { Grid, Link, Paper, Typography } from "@mui/material";
-import CustomPopover from "common/components/Popover";
+import {
+  convertToPieChartData,
+  convertToTopicData,
+  createInitialTopicObject,
+} from "features/Dashboard/utils";
+import { groupedIdMap, topicIdMap } from "features/Dashboard/topicIdMap";
 import PieChart from "features/Dashboard/components/charts/PieChart";
+import CategoryInfoCard from "features/Dashboard/components/SubsAndLikedVids/CategoryInfoCard";
+import ScatterChart from "features/Dashboard/components/charts/ScatterChart";
+import FavouriteCard from "features/Dashboard/components/SubsAndLikedVids/FavouriteCard";
+import MadeForKidsCard from "features/Dashboard/components/SubsAndLikedVids/MadeForKidsCard";
+import StatisticAveragesCard from "features/Dashboard/components/SubsAndLikedVids/StatisticAveragesCard";
+import TopicAccordion from "features/Dashboard/components/SubsAndLikedVids/CategoryAccordion";
 
 const LikedVideos = () => {
   const [madeForKidsRatio, setMadeForKidsRatio] = useState<[number, number]>([
@@ -183,6 +201,56 @@ const LikedVideos = () => {
               data={convertToPieChartData(groupedOccurences)}
             />
           </Paper>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <Stack spacing={2}>
+            <Stack direction="row" spacing={2} sx={{ height: 192 }}>
+              <CategoryInfoCard
+                header="Most popular category"
+                type="most"
+                topicInfo={convertToTopicData(groupedOccurences, "most")}
+              />
+              <CategoryInfoCard
+                header="Least popular category"
+                type="least"
+                topicInfo={convertToTopicData(groupedOccurences, "least")}
+              />
+            </Stack>
+            <Paper sx={{ height: 336 }}>
+              <TopicAccordion groupedOccurences={groupedOccurences} />
+            </Paper>
+          </Stack>
+        </Grid>
+        <Grid item xs={12} lg={6} xl={2}>
+          <MadeForKidsCard madeForKidsRatio={madeForKidsRatio} />
+        </Grid>
+        <Grid item xs={12} lg={6} xl={2}>
+          <StatisticAveragesCard
+            statistic1={nFormatter(averageViewCount.toString(), 1) + " views"}
+            statistic2={nFormatter(averageLikeCount.toString(), 1) + " likes"}
+            statistic3={
+              nFormatter(averageCommentCount.toString(), 1) + " comments"
+            }
+            icon1={<VisibilityIcon fontSize="large" color="primary" />}
+            icon2={<ThumbUpIcon fontSize="large" color="primary" />}
+            icon3={<MessageIcon fontSize="large" color="primary" />}
+          />
+        </Grid>
+        <Grid item xs={12} lg={6} xl={6}>
+          <Paper sx={{ height: 252, pt: 3 }}>
+            <ScatterChart
+              title="Views vs Likes"
+              xLabel="Views"
+              yLabel="Likes"
+              data={subscriberViewPairs}
+            />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} lg={6} xl={2}>
+          <FavouriteCard
+            title={favouriteVideo.snippet?.title}
+            imageURL={favouriteVideo.snippet?.thumbnails?.high?.url}
+          />
         </Grid>
       </Grid>
     </Box>

@@ -1,21 +1,23 @@
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import PersonIcon from "@mui/icons-material/Person";
-import VideocamIcon from "@mui/icons-material/Videocam";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import { nFormatter } from "common/utils/generalUtils";
 
 interface IStatisticAveragesCardProps {
-  averageViewCount: number;
-  averageSubscriberCount: number;
-  averageVideoCount: number;
+  statistic1: string;
+  statistic2: string;
+  statistic3: string;
+  icon1: React.ReactNode;
+  icon2: React.ReactNode;
+  icon3: React.ReactNode;
 }
 
 const StatisticAveragesCard = ({
-  averageViewCount,
-  averageSubscriberCount,
-  averageVideoCount,
+  statistic1,
+  statistic2,
+  statistic3,
+  icon1,
+  icon2,
+  icon3,
 }: IStatisticAveragesCardProps) => {
   return (
     <Paper sx={{ height: 252, p: 3 }}>
@@ -24,22 +26,16 @@ const StatisticAveragesCard = ({
       </Typography>
       <Stack spacing={3}>
         <Stack direction="row" spacing={3} alignItems="center">
-          <VisibilityIcon fontSize="large" color="primary" />
-          <Typography>
-            {nFormatter(averageViewCount.toString(), 1)} views
-          </Typography>
+          {icon1}
+          <Typography>{statistic1}</Typography>
         </Stack>
         <Stack direction="row" spacing={3} alignItems="center">
-          <PersonIcon fontSize="large" color="primary" />
-          <Typography>
-            {nFormatter(averageSubscriberCount.toString(), 1)} subscribers
-          </Typography>
+          {icon2}
+          <Typography>{statistic2}</Typography>
         </Stack>
         <Stack direction="row" spacing={3} alignItems="center">
-          <VideocamIcon fontSize="large" color="primary" />
-          <Typography>
-            {nFormatter(averageVideoCount.toString(), 1)} videos
-          </Typography>
+          {icon3}
+          <Typography>{statistic3}</Typography>
         </Stack>
       </Stack>
     </Paper>
