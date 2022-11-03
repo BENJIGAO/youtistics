@@ -1,8 +1,13 @@
 import React from "react";
 import { getToken } from "common/utils/authUtils";
+import { Button } from "@mui/material";
 
 const AuthButton = () => {
-  return <button onClick={getToken}>Get Started</button>;
+  return (
+    <Button variant="contained" onClick={getToken}>
+      Get Started
+    </Button>
+  );
 };
 
 export default AuthButton;

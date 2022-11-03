@@ -10,6 +10,7 @@ import { loadScript, gapiLoad, gisInit } from "common/utils/authUtils";
 import { echartsBootstrap } from "common/utils/chartUtils";
 import Dashboard from "features/Dashboard";
 import Home from "features/Home";
+import Pricing from "features/Home/test";
 
 export const history = createBrowserHistory();
 
@@ -25,7 +26,7 @@ const App = () => {
   return (
     <HistoryRouter history={history}>
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/home" element={<Pricing />} />
         <Route path="/dashboard/*" element={<Dashboard />} />
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="*" element={<div>Not found</div>} />
