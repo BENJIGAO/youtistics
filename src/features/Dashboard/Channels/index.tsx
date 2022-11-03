@@ -1,6 +1,7 @@
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
+import Placeholder from "common/components/Placeholder";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -45,15 +46,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Channels = () => {
   return (
-    <Search>
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
-      />
-    </Search>
+    <Placeholder text="To be developed" />
+    // <Search>
+    //   <SearchIconWrapper>
+    //     <SearchIcon />
+    //   </SearchIconWrapper>
+    //   <StyledInputBase
+    //     placeholder="Search…"
+    //     inputProps={{ "aria-label": "search" }}
+    //   />
+    // </Search>
   );
 };
 

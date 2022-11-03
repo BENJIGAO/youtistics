@@ -1,5 +1,7 @@
+import Placeholder from "common/components/Placeholder";
+
 const Statistics = () => {
-  return <div>Statistics</div>;
+  return <Placeholder text="To be developed" />;
 };
 
 export default Statistics;
