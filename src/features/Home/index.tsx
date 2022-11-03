@@ -11,7 +11,14 @@ import AuthButton from "./AuthButton";
 
 const Home = () => {
   return (
-    <Box sx={{ height: "100vh" }}>
+    <Box
+      sx={{
+        height: "100vh",
+        backgroundColor: "#E5E5F7",
+        backgroundImage:
+          "repeating-radial-gradient( circle at 0 0, transparent 0, #e5e5f7 10px ), repeating-linear-gradient( #f6cbbc55, #f6cbbc )",
+      }}
+    >
       <GlobalStyles
         styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
       />
@@ -75,8 +82,9 @@ const Home = () => {
           View your viewing habits
         </Typography>
         <Typography variant="h5" align="center" component="p">
-          In a never-seen-before app, you can now view your viewing habits on
-          YouTube, for free!
+          In a never-seen-before app, explore your YouTube statistics! See
+          whether you watch more gaming videos than cooking, your favourite
+          channel, and much more!
         </Typography>
         <Container sx={{ mt: 3, display: "flex", justifyContent: "center" }}>
           <AuthButton />
