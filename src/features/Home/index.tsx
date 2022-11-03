@@ -24,36 +24,36 @@ const Home = () => {
       />
       <AppBar
         position="static"
-        color="default"
+        color="primary"
         elevation={0}
         sx={{
           borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
         }}
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          <YoutisticsLogo />
+          <YoutisticsLogo isWhite />
           <nav>
             <Link
               variant="button"
-              color="text.primary"
               href="https://github.com/BENJIGAO/youtistics"
-              sx={{ my: 1, mx: 1.5 }}
+              underline="hover"
+              sx={{ my: 1, mx: 1.5, color: "white" }}
             >
               GitHub
             </Link>
             <Link
               variant="button"
-              color="text.primary"
               href="https://briangao.me/"
-              sx={{ my: 1, mx: 1.5 }}
+              underline="hover"
+              sx={{ my: 1, mx: 1.5, color: "white" }}
             >
               Author
             </Link>
             <Link
               variant="button"
-              color="text.primary"
               href="https://www.youtube.com/channel/UCRoUmX2xxFlN_NuM2cC-p_Q"
-              sx={{ my: 1, mx: 1.5 }}
+              underline="hover"
+              sx={{ my: 1, mx: 1.5, color: "white" }}
             >
               Demo
             </Link>
