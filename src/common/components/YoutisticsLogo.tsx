@@ -7,7 +7,7 @@ const YoutisticsLogo = () => {
   return (
     <ListItem>
       <ListItemIcon>
-        <BubbleChartIcon color="error" fontSize="large" />
+        <BubbleChartIcon sx={{ color: "#EC111B" }} fontSize="large" />
       </ListItemIcon>
       <Typography variant="button" fontSize={18}>
         Youtistics
