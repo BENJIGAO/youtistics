@@ -6,7 +6,7 @@ Youtistics is an app that provides insight into your Youtube viewing habits usin
 * **Visual:** Built upon [ECharts](https://echarts.apache.org/en/index.html), Youtistics provides a clean UI with charts to display data.
 * **Constantly evolving:** There is a plethora of opportunity on new features, so I make it my mission to make this app as complete as possible.
 
-_Note: At this point in the time the project is still in development_
+_Note: Youtistics is currently deployed and undergoing Google verification_
 
 ## Gif Demos
 
