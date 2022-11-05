@@ -253,7 +253,7 @@ const Subscriptions = () => {
               nFormatter(averageSubscriberCount.toString(), 1) + " subscribers"
             }
             statistic3={
-              nFormatter(averageVideoCount.toString(), 1) + " total views"
+              nFormatter(averageVideoCount.toString(), 1) + " total videos"
             }
             icon1={<VisibilityIcon fontSize="large" color="primary" />}
             icon2={<PersonIcon fontSize="large" color="primary" />}
