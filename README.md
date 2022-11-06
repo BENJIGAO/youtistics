@@ -1,6 +1,8 @@
 # Youtistics
 
-Youtistics is an app that provides insight into your Youtube viewing habits using Google's Youtube Data API. Check out the [demo video](https://www.youtube.com/watch?v=MKOleS-8kts)
+Demo video: https://www.youtube.com/watch?v=MKOleS-8kts
+
+Youtistics is an app that provides insight into your Youtube viewing habits using Google's Youtube Data API.
 
 * **Unique:** Although there are many ways of tracking metrics as a Youtuber, never seen before is an app that provides statistics on a user's viewing habits.
 * **Visual:** Built upon [ECharts](https://echarts.apache.org/en/index.html), Youtistics provides a clean UI with charts to display data.
